@@ -1,0 +1,16 @@
+# Ignore node modules
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore OS-specific stuff
+.DS_Store
+Thumbs.db
+
+# Ignore Electron build/output folders (if you use something like electron-builder)
+dist/
+out/
+
+# Ignore lock file if you prefer yarn or npm only
+yarn.lock
