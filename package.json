@@ -3,11 +3,13 @@
     "electron": "^35.1.5"
   },
   "name": "human-computer-interaction-high-fidelity-prototype",
+  "productName": "Studify",
   "version": "1.0.0",
   "description": "High-Fidelity Prototype of our Human-Computer Interaction final project.",
-  "main": "index.js",
+  "main": "js/index.js",
   "dependencies": {
     "boolean": "^3.2.0",
+    "bootstrap": "^5.3.5",
     "buffer-crc32": "^0.2.13",
     "cacheable-lookup": "^5.0.4",
     "cacheable-request": "^7.0.4",
@@ -74,7 +76,7 @@
     "type": "git",
     "url": "git+https://github.com/D4n1eI/Human-Computer-Interaction-High-Fidelity-Prototype.git"
   },
-  "author": "",
+  "author": "Eduardo Romano, Daniel Martins, Tiago Mendes",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/D4n1eI/Human-Computer-Interaction-High-Fidelity-Prototype/issues"
