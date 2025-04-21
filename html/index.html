@@ -54,8 +54,11 @@
           <div class="col-8 mt-auto">
             <!-- Subject Tabs -->
             <ul class="nav nav-tabs mb-3" id="subjectTabs">
-              <li class="nav-item bg-calculus text-white">
-                <a class="nav-link" href="#" style="color: inherit; text-decoration: none;">CCIII</a>
+              <li class="nav-item text-white">
+                <a class="nav-link bg-calculus subject-tab" href="#" style="color: inherit; width: 100px;">CCIII</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link bg-add subject-tab" href="#" style="color: inherit; font-weight: bolder;">+</a>
               </li>
             </ul>
           </div>
@@ -64,14 +67,16 @@
           <div class="col-2 d-flex justify-content-between align-items-center ml-auto mb-4">
             <button class="btn d-flex align-items-center gap-2 bg-user h-100 w-100">
               <img src="../assets/icons/user.png" alt="User Icon" width="50" class="rounded-circle img-fluid">
-              <span class="fw-semibold user-profile">USERNAME</span>
+              <span class="fw-semibold user-profile text-white username">[USERNAME]</span>
             </button>
           </div>
         </div>
         <!-- Main page -->
         <div class="col-10">
-          <h1>Welcome USERNAME</h3>
-          <!-- Deadlines -->
+          <!-- Welcome Message -->
+          <h1 class="mb-4">Welcome <span class="username">[USERNAME]</span></h1>
+        
+          <!-- Deadlines Section -->
           <div class="mb-4">
             <h5>Close Deadlines:</h5>
             <ul class="list-group">
@@ -81,20 +86,20 @@
               </li>
             </ul>
           </div>
-
-          <!-- Subject Grid -->
+        
+          <!-- Subjects Section -->
           <h5>Subjects:</h5>
           <div class="row row-cols-3 g-3">
             <div class="col">
               <button class="btn w-100 text-white bg-calculus subject-card">CC III</button>
             </div>
             <div class="col">
-              <button class="btn btn-outline-secondary w-100 add-subject-card">+</button>
+              <button class="btn btn-outline-secondary w-100 bg-add subject-card">+</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script src="../js/renderer.js"></script>
+    <script src="../js/render.js"></script>
   </body>
 </html>

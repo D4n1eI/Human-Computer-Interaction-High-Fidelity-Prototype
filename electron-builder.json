@@ -1,0 +1,23 @@
+{
+    "appId": "com.EduardoDanielTiago.Studify",
+    "icon": "icon.ico",
+    "productName": "Studify",
+    "files": [
+      "assets/**/*",
+      "js/**/*",
+      "html/**/*",
+      "css/**/*",
+      "package.json"
+    ],
+    "mac": { 
+        "target": "dmg"
+    },
+    "linux": {
+        "target": "AppImage",
+        "category": "Utility"
+    },
+    "win": {
+        "target": ["portable", "msi"]
+    }
+
+}

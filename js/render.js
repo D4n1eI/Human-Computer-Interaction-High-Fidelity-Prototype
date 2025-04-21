@@ -1,1 +1,3 @@
-document.getElementById("username").textContent = "Alice"; // Hardcoded username
+document.querySelectorAll(".username").forEach(el => {
+    el.textContent = "Gertrudes";
+  });
