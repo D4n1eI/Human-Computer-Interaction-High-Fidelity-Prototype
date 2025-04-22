@@ -14,7 +14,7 @@
       <!-- Sidebar -->
       <div class="d-flex flex-column bg-light p-3" style="width: 220px;">
         <a href="index.html">
-          <img src="../assets/icons/logo.png" alt="Studify Logo" class="img-fluid" style="max-height: 60px;">
+            <img src="../assets/icons/logo.png" alt="Studify Logo" class="img-fluid" style="max-height: 60px;">
         </a>
         <ul class="nav flex-column mb-auto">
           <li class="nav-item">
@@ -58,45 +58,38 @@
                 <a class="nav-link bg-calculus subject-tab" href="#" style="color: inherit; width: 100px;">CCIII</a>
               </li>
               <li class="nav-item">
-                <a href=addsubject.html class="nav-link bg-add subject-tab" href="#" style="color: inherit; font-weight: bolder;">+</a>
+                <a class="nav-link bg-add subject-tab" href="#" style="color: inherit; font-weight: bolder;">+</a>
               </li>
             </ul>
+            <form id="create-subject-form" class="p-3 bg-light rounded shadow-sm">
+                <div class="mb-3">
+                  <label for="subjectName" class="form-label">Subject Name</label>
+                  <input type="text" class="form-control" id="subjectName" placeholder="Enter subject name">
+                </div>
+              
+                <div class="mb-3">
+                  <label for="subjectColor" class="form-label">Subject Color</label>
+                  <input type="color" class="form-control form-control-color" id="subjectColor" value="#563d7c" title="Choose your color">
+                </div>
+              
+                <button type="submit" class="btn btn-primary w-100">Create Subject</button>
+              </form>
+              
           </div>
           <div class="col-2"></div>
           <!-- User Button -->
-          <div class="col-2 d-flex justify-content-between align-items-center ml-auto mb-4">
-            <button class="btn d-flex align-items-center gap-2 bg-user h-100 w-100">
+          <div class="col-2 d-flex align-items-start justify-content-end">
+            <button class="btn d-flex align-items-center gap-2 bg-user">
               <img src="../assets/icons/user.png" alt="User Icon" width="50" class="rounded-circle img-fluid">
               <span class="fw-semibold user-profile text-white username">[USERNAME]</span>
             </button>
           </div>
+          
         </div>
         <!-- Main page -->
         <div class="col-10">
-          <!-- Welcome Message -->
-          <h1 class="mb-4">Welcome <span class="username">[USERNAME]</span></h1>
         
-          <!-- Deadlines Section -->
-          <div class="mb-4">
-            <h5>Close Deadlines:</h5>
-            <ul class="list-group">
-              <li class="list-group-item d-flex justify-content-between align-items-center bg-calculus text-white deadline-card">
-                Calculus III Test
-                <span class="badge">17/04 13:00</span>
-              </li>
-            </ul>
-          </div>
-        
-          <!-- Subjects Section -->
-          <h5>Subjects:</h5>
-          <div class="row row-cols-3 g-3">
-            <div class="col">
-              <button class="btn w-100 text-white bg-calculus subject-card">CC III</button>
-            </div>
-            <div class="col">
-              <a href="addsubject.html" class="btn btn-outline-secondary w-100 bg-add subject-card">+</a>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>

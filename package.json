@@ -97,10 +97,10 @@
       "package.json"
     ],
     "directories": {
-     "output": "dist"
-   },
-   "win": {
-     "target": "nsis"
-   }
-}
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  }
 }

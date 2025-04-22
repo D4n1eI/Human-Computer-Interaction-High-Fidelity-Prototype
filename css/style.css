@@ -141,3 +141,22 @@ body {
   .bg-add:hover{
     background-color: #b6b5b5;
   }
+
+  body {
+    display: flex;
+  }
+  nav {
+    width: 250px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    height: 100vh;
+  }
+  main {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  li {
+    list-style-type: none;
+    margin-bottom: 20px;
+  }
+  
