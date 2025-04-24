@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     height: 100vh;
   }
@@ -11,12 +11,15 @@ body {
   }
   
   .sidebar {
-    width: 200px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 220px;
     background-color: #f0f0f0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 10px;
+    z-index: 1000;
   }
 
   .sidebar-text{
@@ -49,6 +52,7 @@ body {
   
   .main-content {
     flex: 1;
+    margin-left: 230px;
     padding: 20px;
   }
   
@@ -141,22 +145,44 @@ body {
   .bg-add:hover{
     background-color: #b6b5b5;
   }
-
-  body {
-    display: flex;
-  }
-  nav {
-    width: 250px;
-    background-color: #f0f0f0;
-    padding: 20px;
-    height: 100vh;
-  }
-  main {
-    flex-grow: 1;
-    padding: 20px;
-  }
-  li {
-    list-style-type: none;
-    margin-bottom: 20px;
-  }
   
+/* Remove the gap between the tabs and the line */
+.nav-tabs {
+  margin-bottom: 0;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Highlight the active tab with increased height */
+.nav-tabs .nav-link.active {
+  background-color: #8c099b;
+  border-bottom: 3px solid #8c099b;
+  padding-bottom: 20px;
+}
+
+/* Study Button Container */
+.study-button-container {
+  display: flex; /* Use flexbox for alignment */
+  justify-content: flex-end; /* Align the button to the right */
+  align-items: flex-end; /* Align the button to the bottom */
+  height: 100%; /* Ensure the container spans the full height of its parent */
+  position: relative; /* Ensure the button stays within the container */
+}
+
+/* Study Button Wrapper */
+.study-button-wrapper {
+  display: inline-block; /* Ensure the button wrapper behaves like a block */
+  margin-top: 10px; /* Add space from the bottom */
+  margin-left: 10px; /* Add space from the right */
+}
+
+/* Study Button */
+.study-button {
+  width: 350px;
+  transition: transform 0.2s ease-in-out; /* Smooth scaling effect */
+  transform-origin: center bottom; /* Ensure scaling happens from the top */
+}
+
+.study-button:hover {
+  content: url(../assets/pixel/study-hover.png); /* Change image on hover */
+  transform: scale(1.05); /* Scale the button */
+}

@@ -2,13 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
-    <title>Studify</title>
+    <title>CCIII - Studify</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
   </head>
-  <body class=" body d-flex flex-column vh-100">
+  <body class="body d-flex flex-column vh-100">
     <div class="d-flex flex-grow-1">
       
       <!-- Sidebar -->
@@ -66,21 +65,19 @@
         </div>
       </div>
       
-  
       <!-- Main Content -->
       <div class="flex-grow-1 p-4 col-8 main-content">
         <div class="row" style="height: 100px;">        
           <div class="col-8 mt-auto">
-
             <!-- Subject Tabs -->
             <ul class="nav nav-tabs mt-auto mb-3 align-items-end" id="subjectTabs">
               <li class="nav-item text-white">
-                <a class="nav-link bg-calculus subject-tab" aria-current="page" href="cciii.html" style="color: inherit; width: 100px;">
+                <a class="nav-link bg-calculus active subject-tab" aria-current="page" href="cciii.html" style="color: inherit;">
                     <span class="fw-bold">CCIII</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="addsubject.html" class="nav-link bg-add subject-tab" style="color: inherit; font-weight: bolder;">
+                <a href="addsubject.html" class="nav-link bg-add subject-tab" style="color: inherit;">
                     <span class="fw-bold">+</span>
                 </a>
               </li>
@@ -95,35 +92,67 @@
             </button>
           </div>
         </div>
-        <!-- Main page -->
-        <div class="col-10">
-          <!-- Welcome Message -->
-          <h1 class="mb-4">Welcome <span class="username">[USERNAME]</span></h1>
         
-          <!-- Deadlines Section -->
-          <div class="mb-4">
-            <h5>Close Deadlines:</h5>
-            <ul class="list-group">
-              <li class="list-group-item d-flex justify-content-between align-items-center bg-calculus text-white deadline-card">
-                Calculus III Test
-                <span class="badge">17/04 13:00</span>
-              </li>
-            </ul>
+        <!-- Main Page -->
+        <div class="col-10 mt-4">
+          <div class="row mb-4">
+            <div class="col-6">
+              <!-- Section Title -->
+              <h1>Calculus III</h1>
+            </div>
+            <div class="col-2 d-flex">
+              <!-- Alias Badge -->
+              <div class="badge bg-calculus d-flex align-items-center justify-content-center" style="height: 100%; font-size: 1.25rem;">
+                <span class="fw-bold">CCIII</span>
+              </div>
+            </div>
+            <div class="col-4 d-flex justify-content-end">
+              <!-- Edit Button Badge -->
+              <button class="btn btn-info d-flex align-items-center justify-content-center" style="height: 100%; font-size: 1.25rem;">
+                <img src="../assets/icons/settings.png" alt="Edit" width="50" class="img-fluid">
+              </button>
+            </div>
           </div>
-        
-          <!-- Subjects Section -->
-          <h5>Subjects:</h5>
-          <div class="row row-cols-3 g-3">
+          <div class="col-6 mb-3">
+            <h5>Calculus III is very, very difficult, so i need to study a lot if I want to get good grande!</h5>
+          </div>
+          <!-- Features Section -->
+          <div class="row row-cols-2 g-3 mb-4">
             <div class="col">
-              <a href="cciii.html" class="btn w-100 text-white bg-calculus subject-card">CC III</a>
+              <button class="btn w-100 text-white bg-calculus subject-card">
+                <img src="../assets/icons/folder.png" alt="Files" width="40" class="me-2">
+                Files
+              </button>
             </div>
             <div class="col">
-              <a href="addsubject.html" class="btn btn-outline-secondary w-100 bg-add subject-card">+</a>
+              <button class="btn w-100 text-white bg-calculus subject-card">
+                <img src="../assets/icons/events.png" alt="Events" width="40" class="me-2">
+                Events
+              </button>
+            </div>
+          </div>
+          <div class="row row-cols-2">
+            <!-- Deadlines Section -->
+            <div class="col">
+                <h5>Close Deadlines:</h5>
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center bg-calculus text-white deadline-card">
+                    Calculus III Test
+                    <span class="badge">17/04 13:00</span>
+                  </li>
+              </ul>
+            </div>
+            <!-- Study-Button Section -->
+            <div class="col study-button-container d-flex justify-content-end align-items-end">
+              <a href="#" class="study-button-wrapper">
+                <img src="../assets/pixel/study-button.png" alt="Study" class="img-fluid study-button">
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
     <script src="../js/render.js"></script>
   </body>
 </html>
