@@ -132,10 +132,16 @@ body {
 
   .bg-calculus{
     background-color: #c217d5;
+    --hover-color: #8c099b;
   }
 
   .bg-calculus:hover{
-    background-color: #8c099b;
+    background-color: var(--hover-color);
+  }
+
+  .nav-tabs .nav-link.bg-calculus.active{
+    background-color: var(--hover-color);
+    border-bottom: 3px solid var(--hover-color);
   }
 
   .bg-add{
@@ -154,9 +160,8 @@ body {
 
 /* Highlight the active tab with increased height */
 .nav-tabs .nav-link.active {
-  background-color: #8c099b;
-  border-bottom: 3px solid #8c099b;
   padding-bottom: 20px;
+  color: inherit;
 }
 
 /* Study Button Container */

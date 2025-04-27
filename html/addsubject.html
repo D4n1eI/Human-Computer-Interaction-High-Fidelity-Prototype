@@ -70,34 +70,6 @@
                 <a class="nav-link bg-add subject-tab" href="#" style="color: inherit; font-weight: bolder;">+</a>
               </li>
             </ul>
-            <form id="create-subject-form" class="p-3 bg-light rounded shadow-sm">
-              <div class="mb-3">
-                <label for="subjectName" class="form-label">Subject Name</label>
-                <input type="text" class="form-control" id="subjectName" placeholder="Enter subject name">
-                <small id="subjectNameHelp" class="form-text text-muted">Subject name must be between 5 and 34 characters.</small>
-              </div>
-            
-              <div class="mb-3">
-                <label for="subjectAlias" class="form-label">Alias</label>
-                <input type="text" class="form-control" id="subjectAlias" placeholder="Enter alias">
-                <small id="subjectAliasHelp" class="form-text text-muted">Alias must be between 1 and 5 characters.</small>
-              </div>
-            
-              <div class="mb-3">
-                <label for="subjectDescription" class="form-label">Description</label>
-                <textarea class="form-control" id="subjectDescription" placeholder="Enter subject description"></textarea>
-                <small id="subjectDescriptionHelp" class="form-text text-muted">Description can be up to 400 characters.</small>
-              </div>
-            
-              <div class="mb-3">
-                <label for="subjectColor" class="form-label">Subject Color</label>
-                <input type="color" class="form-control form-control-color" id="subjectColor" value="#563d7c" title="Choose your color">
-              </div>
-            
-              <button type="submit" class="btn btn-primary w-100">Create Subject</button>
-            </form>
-            
-            
               
           </div>
           <div class="col-2"></div>
@@ -112,7 +84,32 @@
         </div>
         <!-- Main page -->
         <div class="col-10">
-        
+          <form id="create-subject-form" class="p-3 bg-light rounded shadow-sm">
+            <div class="mb-3">
+              <label for="subjectName" class="form-label">Subject Name</label>
+              <input type="text" class="form-control" id="subjectName" placeholder="Enter subject name">
+              <small id="subjectNameHelp" class="form-text text-muted">Subject name must be between 5 and 34 characters.</small>
+            </div>
+          
+            <div class="mb-3">
+              <label for="subjectAlias" class="form-label">Alias</label>
+              <input type="text" class="form-control" id="subjectAlias" placeholder="Enter alias">
+              <small id="subjectAliasHelp" class="form-text text-muted">Alias must be between 1 and 5 characters.</small>
+            </div>
+          
+            <div class="mb-3">
+              <label for="subjectDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="subjectDescription" placeholder="Enter subject description"></textarea>
+              <small id="subjectDescriptionHelp" class="form-text text-muted">Description can be up to 400 characters.</small>
+            </div>
+          
+            <div class="mb-3">
+              <label for="subjectColor" class="form-label">Subject Color</label>
+              <input type="color" class="form-control form-control-color" id="subjectColor" value="#563d7c" title="Choose your color">
+            </div>
+          
+            <button type="submit" class="btn btn-primary w-100">Create Subject</button>
+          </form>
           
         </div>
       </div>

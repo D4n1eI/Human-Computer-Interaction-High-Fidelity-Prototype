@@ -1,5 +1,5 @@
 document.querySelectorAll(".username").forEach(el => {
-  el.textContent = "Gertrudes"; 
+  el.textContent = "Luís"; 
 });
 
 const subjectTabs = document.getElementById('subjectTabs');
