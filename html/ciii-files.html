@@ -6,10 +6,11 @@
     <title>CCIII - Studify</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/files.css">
   </head>
   <body class="body d-flex flex-column vh-100">
     <div class="d-flex flex-grow-1">
-      
+      <div id="loadingSpinner" style="display: none;">Loading...</div>  
       <!-- Sidebar -->
       <div class="d-flex flex-column bg-light p-3 sidebar">
         <a href="index.html" class="mb-4 text-center">
@@ -106,10 +107,19 @@
               <h1>Calculus III Files</h1>
             </div>
           </div>
+          <div class="toolbar">
+            <button id="toggleView" title="Toggle View"><i class="icon-toggle"></i></button>
+            <button id="uploadFile" title="Upload File"><i class="icon-upload"></i></button>
+          </div>
+          
+          <div id="fileTree" class="tree-view">
+            <!-- Dynamic tree will appear here -->
+          </div>
         </div>
       </div>
     </div>
     
     <script src="../js/render.js"></script>
+    <script src="../js/files.js"></script>
   </body>
 </html>

@@ -11,7 +11,11 @@ const createWindow = () => {
     minHeight: 600,
     icon: path.join(__dirname, '..', 'icon.ico'),
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+      enableRemoteModule: false,  // Disabling remote module
+      nodeIntegration: false,  // Disabling Node.js integration
+      sandbox: false,  // Disable sandboxing to allow 'fs' usage
     }
   })
   win.maximize()

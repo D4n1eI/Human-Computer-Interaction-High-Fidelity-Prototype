@@ -1,0 +1,63 @@
+.tree-view {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+  }
+  
+  .tree-node {
+    margin-left: 20px;
+    position: relative;
+  }
+  
+  .tree-node .item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 0;
+    position: relative;
+  }
+  
+  .tree-node .item i {
+    margin-right: 10px;
+  }
+  
+  .tree-node .actions {
+    margin-left: auto;
+    display: none; /* Hide by default */
+    gap: 5px;
+  }
+  
+  .tree-node .item:hover .actions {
+    display: flex; /* Show actions on hover */
+  }
+  
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .icon-folder::before {
+    content: "📁";
+  }
+  
+  .icon-file::before {
+    content: "📄";
+  }
+  
+  .icon-upload::before {
+    content: "⬆️";
+  }
+  
+  .icon-download::before {
+    content: "⬇️";
+  }
+  
+  .icon-delete::before {
+    content: "🗑️";
+  }
