@@ -1,112 +1,219 @@
 document.addEventListener('DOMContentLoaded', () => {
     const fileTreeContainer = document.getElementById('fileTree');
-    const uploadButton = document.getElementById('uploadButton');
+    const createFolderButton = document.getElementById('createFolder');
+    const createFolderModal = document.getElementById('createFolderModal');
+    const closeModal = document.getElementById('closeModal');
+    const folderNameInput = document.getElementById('folderNameInput');
+    const confirmCreateFolder = document.getElementById('confirmCreateFolder');
+    const uploadButton = document.getElementById('uploadFile');
     const deleteButton = document.getElementById('deleteButton');
     const downloadButton = document.getElementById('downloadButton');
   
-    let currentFolder = '../calculus'; // Set your initial folder path here
+    let currentFolder = './calculus'; // Set your initial folder path here
   
     async function loadFolder() {
-      const entries = await api.readFolder(currentFolder);
-      renderTree(entries, fileTreeContainer);
+      try {
+        const entries = await api.readFolder(currentFolder);
+        fileTreeContainer.innerHTML = ''; // Clear the container
+        renderTree(entries, fileTreeContainer);
+      } catch (error) {
+        console.error('Error loading folder:', error);
+      }
     }
   
+    createFolderButton.onclick = async () => {
+      const folderName = prompt('Enter the name of the new folder:');
+      if (folderName) {
+        const result = await api.createFolder(currentFolder, folderName);
+        if (result.success) {
+          console.log(`Folder created: ${folderName}`);
+          loadFolder(); // Reload the folder structure
+        } else {
+          console.error('Error creating folder:', result.error);
+        }
+      }
+    };
+
+    createFolderButton.onclick = () => {
+      createFolderModal.style.display = 'block'; // Show the modal
+    };
+  
+    closeModal.onclick = () => {
+      createFolderModal.style.display = 'none'; // Hide the modal
+      folderNameInput.value = ''; // Clear the input
+    };
+  
+    confirmCreateFolder.onclick = async () => {
+      const folderName = folderNameInput.value.trim();
+      if (folderName) {
+        const result = await api.createFolder(currentFolder, folderName);
+        if (result.success) {
+          console.log(`Folder created: ${folderName}`);
+          loadFolder(); // Reload the folder structure
+        } else {
+          console.error('Error creating folder:', result.error);
+        }
+      }
+      createFolderModal.style.display = 'none'; // Hide the modal
+      folderNameInput.value = ''; // Clear the input
+    };
+  
+    // Close the modal if the user clicks outside of it
+    window.onclick = (event) => {
+      if (event.target === createFolderModal) {
+        createFolderModal.style.display = 'none';
+        folderNameInput.value = ''; // Clear the input
+      }
+    };
+
     function renderTree(data, parentElement) {
-      data.forEach(item => {
+      data.forEach((item) => {
         const node = document.createElement('div');
         node.classList.add('tree-node');
-  
+    
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('item');
-  
+    
         const icon = document.createElement('img');
         icon.src = item.type === 'folder' ? 'assets/icons/folder-icon.svg' : 'assets/icons/file-icon.svg';
         itemDiv.appendChild(icon);
-  
+    
         const nameSpan = document.createElement('span');
         nameSpan.textContent = item.name;
         itemDiv.appendChild(nameSpan);
-  
+    
         const actions = document.createElement('div');
         actions.classList.add('actions');
         actions.style.display = 'none';
-  
-        const downloadBtn = document.createElement('button');
-        downloadBtn.innerHTML = `<img src="assets/icons/download-icon.svg" alt="Download">`;
-        downloadBtn.onclick = (e) => {
-          e.stopPropagation();
-          console.log('Downloading', item.fullPath);
-          // Implement download functionality here
-        };
-        actions.appendChild(downloadBtn);
-  
-        const deleteBtn = document.createElement('button');
-        deleteBtn.innerHTML = `<img src="assets/icons/delete-icon.svg" alt="Delete">`;
-        deleteBtn.onclick = (e) => {
-          e.stopPropagation();
-          console.log('Deleting', item.fullPath);
-          // Implement delete functionality here
-        };
-        actions.appendChild(deleteBtn);
-  
+
+        // Upload Button (only for folders)
         if (item.type === 'folder') {
           const uploadBtn = document.createElement('button');
           uploadBtn.innerHTML = `<img src="assets/icons/upload-icon.svg" alt="Upload">`;
-          uploadBtn.onclick = (e) => {
+          uploadBtn.onclick = async (e) => {
             e.stopPropagation();
-            console.log('Uploading into', item.fullPath);
-            // Implement upload functionality here
+            const confirmUpload = confirm(`Do you want to upload a file to "${item.name}"?`);
+            if (confirmUpload) {
+              console.log(`Uploading to: ${item.name}`);
+              const result = await api.uploadFile(item.fullPath);
+              if (result.success) {
+                console.log('File uploaded:', result.fileName);
+                loadFolder(); // Reload the folder
+              } else {
+                console.error('Error uploading file:', result.error);
+              }
+            }
           };
           actions.appendChild(uploadBtn);
         }
-  
+    
+        // Download Button
+        const downloadBtn = document.createElement('button');
+        downloadBtn.innerHTML = `<img src="assets/icons/download-icon.svg" alt="Download">`;
+        downloadBtn.onclick = async (e) => {
+          e.stopPropagation();
+          console.log(`Downloading: ${item.name}`);
+          const result = await api.downloadFile(item.fullPath);
+          if (result.success) {
+            console.log('Downloaded:', item.fullPath);
+          } else {
+            console.error('Error downloading file or folder:', result.error);
+          }
+        };
+        actions.appendChild(downloadBtn);
+    
+        // Delete Button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerHTML = `<img src="assets/icons/delete-icon.svg" alt="Delete">`;
+        deleteBtn.onclick = async (e) => {
+          e.stopPropagation();
+          const confirmDelete = confirm(`Are you sure you want to delete "${item.name}"?`);
+          if (confirmDelete) {
+            console.log(`Deleting: ${item.name}`);
+            const result = await api.deleteFile(item.fullPath);
+            if (result.success) {
+              console.log('Deleted:', item.fullPath);
+              loadFolder(); // Reload the folder structure
+            } else {
+              console.error('Error deleting file or folder:', result.error);
+            }
+          }
+        };
+        actions.appendChild(deleteBtn);
+    
         itemDiv.appendChild(actions);
         node.appendChild(itemDiv);
-  
+    
         itemDiv.onmouseenter = () => {
           actions.style.display = 'flex';
         };
-  
+    
         itemDiv.onmouseleave = () => {
           actions.style.display = 'none';
         };
-  
+    
         if (item.type === 'folder') {
           const childrenContainer = document.createElement('div');
           childrenContainer.classList.add('children');
           childrenContainer.style.display = 'none';
-  
+    
           itemDiv.onclick = async (e) => {
             if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'IMG') {
               if (childrenContainer.childElementCount === 0) {
                 const entries = await api.readFolder(item.fullPath);
                 renderTree(entries, childrenContainer);
               }
-              childrenContainer.style.display = 
+              childrenContainer.style.display =
                 childrenContainer.style.display === 'none' ? 'block' : 'none';
             }
           };
           node.appendChild(childrenContainer);
         }
-  
+    
         parentElement.appendChild(node);
       });
     }
   
-    uploadButton.addEventListener('click', () => {
-      console.log('Upload button clicked');
-      // Implement upload functionality here
-    });
+    uploadButton.onclick = async (e) => {
+      e.stopPropagation();
+      const confirmUpload = confirm(`Do you want to upload a file to the current folder "${currentFolder}"?`);
+      if (confirmUpload) {
+        const result = await api.uploadFile(currentFolder);
+        if (result.success) {
+          console.log('File uploaded:', result.fileName);
+          loadFolder(); // Reload the folder
+        } else {
+          console.error('Error uploading file:', result.error);
+        }
+      }
+    };
   
-    deleteButton.addEventListener('click', () => {
-      console.log('Delete button clicked');
-      // Implement delete functionality here
-    });
+    deleteButton.onclick = async (e) => {
+      e.stopPropagation();
+      const confirmDelete = confirm(`Are you sure you want to delete the item current folder"${item.name}"?`);
+      if (confirmDelete) {
+        const result = await api.deleteFile(item.fullPath);
+        if (result.success) {
+          console.log('Deleted:', item.fullPath);
+          loadFolder(); // Reload the folder structure
+        } else {
+          console.error('Error deleting file or folder:', result.error);
+        }
+      }
+    };
   
-    downloadButton.addEventListener('click', () => {
-      console.log('Download button clicked');
-      // Implement download functionality here
-    });
+    downloadButton.onclick = async (e) => {
+      e.stopPropagation();
+      const confirmDownload = confirm(`Do you want to download "${item.name}"?`);
+      if (confirmDownload) {
+        const result = await api.downloadFile(item.fullPath);
+        if (result.success) {
+          console.log('Downloaded:', item.fullPath);
+        } else {
+          console.error('Error downloading file or folder:', result.error);
+        }
+      }
+    };
   
     loadFolder(); // Load the initial folder structure
   });

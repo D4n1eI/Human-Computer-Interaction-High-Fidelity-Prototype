@@ -12,8 +12,10 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 5px 0;
+    padding: 5px 10px;
     position: relative;
+    background-color: #f9f9f9;
+    transition: background-color 0.2s ease;
   }
   
   .tree-node .item i {
@@ -24,6 +26,10 @@
     margin-left: auto;
     display: none; /* Hide by default */
     gap: 5px;
+  }
+  
+  .tree-node .item:hover {
+    background-color: #e0e0e0; /* Darker background on hover */
   }
   
   .tree-node .item:hover .actions {
@@ -46,18 +52,43 @@
     content: "📁";
   }
   
-  .icon-file::before {
-    content: "📄";
-  }
-  
   .icon-upload::before {
     content: "⬆️";
   }
-  
-  .icon-download::before {
-    content: "⬇️";
+
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
   }
   
-  .icon-delete::before {
-    content: "🗑️";
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    text-align: center;
+    border-radius: 8px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
   }

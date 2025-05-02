@@ -108,10 +108,23 @@
             </div>
           </div>
           <div class="toolbar">
-            <button id="toggleView" title="Toggle View"><i class="icon-toggle"></i></button>
-            <button id="uploadFile" title="Upload File"><i class="icon-upload"></i></button>
+            <button id="uploadFile" title="Upload File"><i class="icon-upload"></i></button>Upload File
+            <button id="createFolder" title="Create Folder"><i class="icon-folder"></i></button>Create Folder
           </div>
           
+          <div id="createFolderModal" class="modal">
+            <div class="modal-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="m-0">Create New Folder</h2>
+                <span id="closeModal" class="close" style="font-size: 1.5rem; cursor: pointer;">&times;</span>
+              </div>
+              <input class="mb-2 form-control" type="text" id="folderNameInput" placeholder="Enter folder name" />
+              <div class="d-flex justify-content-center">
+                <button id="confirmCreateFolder" class="btn btn-success">Create</button>
+              </div>
+            </div>
+          </div>
+
           <div id="fileTree" class="tree-view">
             <!-- Dynamic tree will appear here -->
           </div>

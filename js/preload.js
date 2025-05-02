@@ -14,24 +14,9 @@ const fs = require('fs');
 const path = require('path');
 
 contextBridge.exposeInMainWorld('api', {
-  readFolder: (folderPath) => {
-    return new Promise((resolve, reject) => {
-      fs.readdir(folderPath, (err, files) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(files.map(file => {
-            const filePath = path.join(folderPath, file);
-            const stats = fs.statSync(filePath);
-            return {
-              name: file,
-              type: stats.isDirectory() ? 'folder' : 'file',
-              fullPath: filePath
-            };
-          }));
-        }
-      });
-    });
-  },
-  // Add any other API methods you want to expose
+  readFolder: (folderPath) => ipcRenderer.invoke('read-folder', folderPath),
+  uploadFile: (folderPath) => ipcRenderer.invoke('upload-file', folderPath),
+  deleteFile: (filePath) => ipcRenderer.invoke('delete-file', filePath),
+  downloadFile: (filePath) => ipcRenderer.invoke('download-file', filePath),
+  createFolder: (folderPath, folderName) => ipcRenderer.invoke('create-folder', folderPath, folderName),
 });
