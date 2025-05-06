@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function showTab(tab) {
       if (tab === 'saved') {
         content.innerHTML = `
-          <div style="position: relative; display: flex; justify-content: space-between; align-items: center; height: 10%; background-color: #f0f0f0; border-radius: 10px; border: 2px solid #ccc;">
+          <div style="position: relative; display: flex; justify-content: space-between; align-items: center; height: 20%; background-color: #f0f0f0; border-radius: 10px; border: 2px solid #ccc;">
             <span style="font-weight: bold;">Quiz 1</span>
             <div style="display: flex; gap: 2%;">
               <button class="option">
