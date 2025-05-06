@@ -22,17 +22,32 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (tab === 'create') {
         content.innerHTML = `
           <form>
-            <label>Quiz Name: <input type="text" /></label><br />
-            <button type="submit">Create</button>
+            <label>Quiz Name: <input type="text" placeholder="..." /></label>
+            <label>
+              Number of Questions:
+              <select id="questionSelect">
+                <option disabled selected>...</option>
+              </select>
+            </label>
+            <button class="option">
+                Create
+            </button>
           </form>
         `;
+  
+    const selectElement = document.getElementById('questionSelect');
+      for (let i = 1; i <= 20; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        selectElement.appendChild(option);
       }
     }
-  
-    document.getElementById('saved-tab').addEventListener('click', () => showTab('saved'));
-    document.getElementById('create-tab').addEventListener('click', () => showTab('create'));
-  
-    // Load default tab
-    showTab('saved');
-  });
-  
+  }
+
+  document.getElementById('saved-tab').addEventListener('click', () => showTab('saved'));
+  document.getElementById('create-tab').addEventListener('click', () => showTab('create'));
+
+  // Load default tab
+  showTab('saved');
+});
