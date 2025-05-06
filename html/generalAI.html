@@ -30,7 +30,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <div class="row">
+              <div class="row btn-not-implemented">
                 <div class="col-6">
                   <img src="../assets/icons/calendar.png" alt="Calendar" width="50" class="img-fluid">
                 </div>
@@ -47,14 +47,14 @@
               <span class="sidebar-text">LAN:</span>
             </div>
             <div class="col-6 text-start">
-              <a href="#" class="nav-link d-inline">
+              <a href="#" class="nav-link d-inline btn-not-implemented">
                 <img src="../assets/icons/united-states.png" alt="lang" width="50" class="language-flag">
               </a>
             </div>
           </div>
           <div class="row align-items-center">
             <div class="col-6 text-end">
-              <a href="#" class="nav-link d-inline">
+              <a href="#" class="nav-link d-inline btn-not-implemented">
                 <img src="../assets/icons/settings.png" alt="Settings" width="50" class="img-fluid">
               </a>
             </div>
@@ -85,7 +85,7 @@
           <div class="col-2"></div>
           <!-- User Button -->
           <div class="col-2 d-flex justify-content-between align-items-center ml-auto mb-4">
-            <button class="btn d-flex align-items-center gap-2 bg-user h-100 w-100">
+            <button class="btn d-flex align-items-center gap-2 bg-user h-100 w-100 btn-not-implemented">
               <img src="../assets/icons/user.png" alt="User Icon" width="50" class="rounded-circle img-fluid">
               <span class="fw-semibold user-profile text-white username">[USERNAME]</span>
             </button>
@@ -102,14 +102,32 @@
           </div>
           <div style="position: fixed; bottom: 0; left: -10%; right: 0; padding: 10px; background: #fff;">
             <div style="border-top: 2px solid #ccc; width: 50%; margin: 0 auto;">
-                <button style="width: 5%; padding: 8px;">+</button>
+                <button style="width: 5%; padding: 8px;" class="btn-not-implemented">+</button>
                 <input type="text" placeholder="Ask a question..." style="width: 88.5%; padding: 8px;">
                 <button style="width: 5%; padding: 8px;">></button>
             </div>
           </div>
         </div>
       </div>
+      <!-- Not Implemented Modal -->
+      <div class="modal fade" id="notImplementedModal" tabindex="-1" aria-labelledby="notImplementedLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="notImplementedLabel">Feature Not Implemented</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              This feature has not been implemented yet.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/render.js"></script>
   </body>
 </html>

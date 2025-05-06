@@ -2,8 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentPath = window.location.pathname;
 
   document.querySelectorAll(".username").forEach(el => {
-    el.textContent = "Luís"; 
+    el.textContent = "Gertrudes"; 
   });
+
+  if (!currentPath.includes("cciii-files.html")){
+    const modal = new bootstrap.Modal(document.getElementById('notImplementedModal'));
+
+    document.querySelectorAll('.btn-not-implemented').forEach(button => {
+      button.addEventListener('click', () => {
+        modal.show();
+      });
+    });
+  }
 
   if (currentPath.includes("addsubject.html"))  {
   
