@@ -24,54 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const subjectDescriptionInput = document.getElementById('subjectDescription');
     const subjectColorInput = document.getElementById('subjectColor'); 
   
-    // Load subjects from sessionStorage
-    function renderSubjects() {
-      const savedSubjects = JSON.parse(sessionStorage.getItem("subjects") || "[]");
-
-      // Clear existing subject tabs except the "+" tab
-      subjectTabs.querySelectorAll('.subject-tab').forEach(tab => {
-        if (!tab.classList.contains('bg-add')) {
-          tab.parentElement.remove();
-        }
-      });
-
-      savedSubjects.forEach(subject => {
-        addSubjectToUI(subject.name, subject.alias, subject.description, subject.color);
-      });
-    }
-    
-      // Add a subject tab to the UI
-    function addSubjectToUI(name, alias, description, color) {
-      const newTab = document.createElement('li');
-      newTab.className = 'nav-item text-white';
-
-      const newLink = document.createElement('a');
-      newLink.className = 'nav-link subject-tab';
-      newLink.href = '#';
-      newLink.style.color = 'inherit';
-      newLink.style.width = '100px';
-      newLink.style.backgroundColor = color;
-      newLink.style.fontWeight = 'bold';
-      newLink.textContent = alias;
-      newLink.title = `Name: ${name}\nAlias: ${alias}\nDescription: ${description}`;
-
-      newTab.appendChild(newLink);
-      subjectTabs.insertBefore(newTab, subjectTabs.lastElementChild);
-    }
-
-    // Tooltip for alias
-    document.getElementById('alias-tooltip').addEventListener('click', () => {
-      alert("The Alias is a shorthand name or abbreviation for the subject, used for quick reference.");
-    });
-  
     createForm.addEventListener('submit', (e) => {
       e.preventDefault();
-    
+
       const name = subjectNameInput.value.trim();
       const alias = subjectAliasInput.value.trim();
       const description = subjectDescriptionInput.value.trim();
       const color = subjectColorInput.value;
-    
+
       // Validation
       if (!name || name.length < 5 || name.length > 34) {
         alert("Subject Name must be between 5 and 34 characters.");
@@ -85,15 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("Description must not exceed 400 characters.");
         return;
       }
-    
+
       const subjects = JSON.parse(sessionStorage.getItem("subjects") || "[]");
-    
+
       // Check for duplicate name or alias
       const duplicate = subjects.find(subject =>
         subject.name.toLowerCase() === name.toLowerCase() ||
         subject.alias.toLowerCase() === alias.toLowerCase()
       );
-    
+
       if (duplicate) {
         if (duplicate.name.toLowerCase() === name.toLowerCase()) {
           alert("Name already in use.");
@@ -102,60 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return;
       }
-    
+
       const newSubject = { name, alias, description, color };
       subjects.push(newSubject);
       sessionStorage.setItem("subjects", JSON.stringify(subjects));
-    
+
+      // Set the boolean flag to true
+      sessionStorage.setItem("subjectCreated", "true");
+
       addSubjectToUI(name, alias, description, color);
       createForm.reset();
       subjectColorInput.value = "#15ce46"; // Reset to fixed color
     });
-    
-    // Hardcoded subject data
-    const hardcodedSubject = {
-      name: "Human-Computer Interaction",
-      alias: "IHC",
-      description: "This is Human Computer Interaction",
-      color: "#15ce46"
-    };
-    
-    // Check if already added (avoid duplication)
-    let existingSubjects = JSON.parse(sessionStorage.getItem("subjects") || "[]");
-    const alreadyExists = existingSubjects.some(subject =>
-      subject.name.toLowerCase() === hardcodedSubject.name.toLowerCase() ||
-      subject.alias.toLowerCase() === hardcodedSubject.alias.toLowerCase()
-    );
-    
-    if (!alreadyExists) {
-      existingSubjects.push(hardcodedSubject);
-      sessionStorage.setItem("subjects", JSON.stringify(existingSubjects));
-      addSubjectToUI(
-        hardcodedSubject.name,
-        hardcodedSubject.alias,
-        hardcodedSubject.description,
-        hardcodedSubject.color
-      );
-    }
-    
-    
-    function addSubjectToUI(name, alias, description, color) {
-      const newTab = document.createElement('li');
-      newTab.className = 'nav-item text-white';
-    
-      const newLink = document.createElement('a');
-      newLink.className = 'nav-link bg-hci subject-tab';
-      newLink.href = 'hci.html';
-      newLink.style.color = 'inherit';
-      newLink.style.width = '100px';
-      newLink.style.backgroundColor = color;
-      newLink.style.fontWeight = 'bold';
-      newLink.textContent = alias;
-      newLink.title = `Alias: ${alias}\nDescription: ${description}`;
-    
-      newTab.appendChild(newLink);
-      subjectTabs.insertBefore(newTab, subjectTabs.lastElementChild);
-    }
   }
   // Now use the api object from preload.js
   else if (currentPath.includes("ciii-files.html")){
@@ -257,5 +175,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   loadFolder(); // Load the initial folder structure
+
+  const subjectTabs = document.getElementById('subjectTabs');
+
+  // Check the boolean flag
+  const subjectCreated = sessionStorage.getItem("subjectCreated") === "true";
+  if (subjectCreated) {
+    const subjects = JSON.parse(sessionStorage.getItem("subjects") || "[]");
+    subjects.forEach(subject => {
+      addSubjectToUI(subject.name, subject.alias, subject.description, subject.color);
+    });
+  }
+
+  function addSubjectToUI(name, alias, description, color) {
+    const subjectTabs = document.getElementById('subjectTabs');
+    const newTab = document.createElement('li');
+    newTab.className = 'nav-item text-white';
+
+    const newLink = document.createElement('a');
+    newLink.className = 'nav-link subject-tab';
+    newLink.href = 'hci.html';
+    newLink.style.color = 'inherit';
+    newLink.style.width = '100px';
+    newLink.style.backgroundColor = color;
+    newLink.style.fontWeight = 'bold';
+    newLink.textContent = alias;
+    newLink.title = `Name: ${name}\nAlias: ${alias}\nDescription: ${description}`;
+
+    newTab.appendChild(newLink);
+    subjectTabs.insertBefore(newTab, subjectTabs.lastElementChild);
+  }
 }
 });
