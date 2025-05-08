@@ -66,32 +66,16 @@
                 <a class="nav-link bg-add subject-tab" href="#" style="color: inherit; font-weight: bolder;">+</a>
               </li>
             </ul>
-            <div class="mb-4 d-flex align-items-center">
-              <a href="index.html" class="btn btn-secondary me-3">
-                <i class="bi bi-arrow-left"></i> <
-              </a>
-              
-              <h3 class="text-dark mb-0">Adding new Subject</h3>
-            </div>
-            
             <form id="create-subject-form" class="p-3 bg-light rounded shadow-sm">
               <div class="mb-3">
-                <label for="subjectName" class="form-label">Subject Name <span style="color: red;">*</span></label>
+                <label for="subjectName" class="form-label">Subject Name</label>
                 <input type="text" class="form-control" id="subjectName" placeholder="Enter subject name">
                 <small id="subjectNameHelp" class="form-text text-muted">Subject name must be between 5 and 34 characters.</small>
               </div>
             
               <div class="mb-3">
-                <label for="subjectAlias" class="form-label">Alias <span style="color: red;">*</span></label>
-                <span id="alias-tooltip" style="cursor: pointer;">
-                  ?
-                </span>
-                
-                <div class="d-flex align-items-center">
-                  <input type="text" class="form-control" id="subjectAlias" placeholder="Enter alias">
-                  <!-- Tooltip icon -->
-                  
-                </div>
+                <label for="subjectAlias" class="form-label">Alias</label>
+                <input type="text" class="form-control" id="subjectAlias" placeholder="Enter alias">
                 <small id="subjectAliasHelp" class="form-text text-muted">Alias must be between 1 and 5 characters.</small>
               </div>
             
@@ -103,12 +87,14 @@
             
               <div class="mb-3">
                 <label for="subjectColor" class="form-label">Subject Color</label>
-                <input type="color" class="form-control form-control-color" id="subjectColor" value="#15ce46" title="Only one color allowed" readonly>
+                <input type="color" class="form-control form-control-color" id="subjectColor" value="#563d7c" title="Choose your color">
               </div>
-              
             
               <button type="submit" class="btn btn-primary w-100">Create Subject</button>
             </form>
+            
+            
+              
           </div>
           <div class="col-2"></div>
           <!-- User Button -->
@@ -118,8 +104,13 @@
               <span class="fw-semibold user-profile text-white username">[USERNAME]</span>
             </button>
           </div>
+          
         </div>
+        <!-- Main page -->
+        <div class="col-10">
         
+          
+        </div>
       </div>
     </div>
     <script src="../js/render.js"></script>

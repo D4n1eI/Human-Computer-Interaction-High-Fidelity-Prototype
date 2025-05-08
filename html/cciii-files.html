@@ -2,14 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
-    <title>Studify</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+    <title>CCIII - Studify</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/files.css">
   </head>
-  <body class=" body d-flex flex-column vh-100">
+  <body class="body d-flex flex-column vh-100">
     <div class="d-flex flex-grow-1">
+      <div id="loadingSpinner" style="display: none;">Loading...</div>  
       <!-- Sidebar -->
       <div class="d-flex flex-column bg-light p-3 sidebar">
         <a href="index.html" class="mb-4 text-center">
@@ -30,7 +31,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <div class="row btn-not-implemented">
+              <div class="row">
                 <div class="col-6">
                   <img src="../assets/icons/calendar.png" alt="Calendar" width="50" class="img-fluid">
                 </div>
@@ -47,14 +48,14 @@
               <span class="sidebar-text">LAN:</span>
             </div>
             <div class="col-6 text-start">
-              <a href="#" class="nav-link d-inline btn-not-implemented">
+              <a href="#" class="nav-link d-inline">
                 <img src="../assets/icons/united-states.png" alt="lang" width="50" class="language-flag">
               </a>
             </div>
           </div>
           <div class="row align-items-center">
             <div class="col-6 text-end">
-              <a href="#" class="nav-link d-inline btn-not-implemented">
+              <a href="#" class="nav-link d-inline">
                 <img src="../assets/icons/settings.png" alt="Settings" width="50" class="img-fluid">
               </a>
             </div>
@@ -64,6 +65,7 @@
           </div>
         </div>
       </div>
+      
       <!-- Main Content -->
       <div class="flex-grow-1 p-4 col-8 main-content">
         <div class="row" style="height: 100px;">        
@@ -71,12 +73,12 @@
             <!-- Subject Tabs -->
             <ul class="nav nav-tabs mt-auto mb-3 align-items-end" id="subjectTabs">
               <li class="nav-item text-white">
-                <a class="nav-link bg-calculus subject-tab" aria-current="page" href="cciii.html" style="color: inherit; width: 100px;">
+                <a class="nav-link bg-calculus active subject-tab" aria-current="page" href="cciii.html" style="color: inherit;">
                     <span class="fw-bold">CCIII</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="addsubject.html" class="nav-link bg-add subject-tab" style="color: inherit; font-weight: bolder;">
+                <a href="addsubject.html" class="nav-link bg-add subject-tab" style="color: inherit;">
                     <span class="fw-bold">+</span>
                 </a>
               </li>
@@ -85,49 +87,50 @@
           <div class="col-2"></div>
           <!-- User Button -->
           <div class="col-2 d-flex justify-content-between align-items-center ml-auto mb-4">
-            <button class="btn d-flex align-items-center gap-2 bg-user h-100 w-100 btn-not-implemented">
+            <button class="btn d-flex align-items-center gap-2 bg-user h-100 w-100">
               <img src="../assets/icons/user.png" alt="User Icon" width="50" class="rounded-circle img-fluid">
               <span class="fw-semibold user-profile text-white username">[USERNAME]</span>
             </button>
           </div>
         </div>
-        <!-- Main page -->
-        <div class="col-10">
-          <!-- General Assistant -->
-          <h2 class="mb-4" style="text-align: center;">General Assistant</h2>
-          <div style="display: flex; align-items: center;">
-            <button style="position: relative; left: 5%; width: 5%; padding: 8px;"><</button>
-            <img src="../assets/pixel/var1_normal.png" style="position: relative; left: 15%; width: 10%;">
-            <div class="speech-bubble-left" style="top: 25%; left: 20%;">Hello there! How can I help?</div>
-          </div>
-          <div style="position: fixed; bottom: 0; left: -10%; right: 0; padding: 10px; background: #fff;">
-            <div style="border-top: 2px solid #ccc; width: 50%; margin: 0 auto;">
-                <button style="width: 5%; padding: 8px;" class="btn-not-implemented">+</button>
-                <input type="text" placeholder="Ask a question..." style="width: 88.5%; padding: 8px;">
-                <button style="width: 5%; padding: 8px;">></button>
+        
+        <!-- Main Page -->
+        <div class="col-10 mt-4">
+          <div class="row mb-4 align-items-center">
+            <div class="col-2 d-flex justify-content-end">
+            <a href="cciii.html" style="font-weight: bolder;">
+                <div class="btn btn-secondary"><</div>
+            </a>
             </div>
+            <div class="col-6">
+              <!-- Section Title -->
+              <h1>Calculus III Files</h1>
+            </div>
+          </div>
+          <div class="toolbar">
+            <button id="uploadFile" title="Upload File"><i class="icon-upload"></i></button>Upload File
+            <button id="createFolder" title="Create Folder"><i class="icon-folder"></i></button>Create Folder
+          </div>
+          
+          <div id="createFolderModal" class="modal">
+            <div class="modal-content">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="m-0">Create New Folder</h2>
+                <span id="closeModal" class="close" style="font-size: 1.5rem; cursor: pointer;">&times;</span>
+              </div>
+              <input class="mb-2 form-control" type="text" id="folderNameInput" placeholder="Enter folder name" />
+              <div class="d-flex justify-content-center">
+                <button id="confirmCreateFolder" class="btn btn-success">Create</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="fileTree" class="tree-view">
+            <!-- Dynamic tree will appear here -->
           </div>
         </div>
       </div>
-      <!-- Not Implemented Modal -->
-      <div class="modal fade" id="notImplementedModal" tabindex="-1" aria-labelledby="notImplementedLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="notImplementedLabel">Feature Not Implemented</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              This feature has not been implemented yet.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/render.js"></script>
+    <script src="../js/files.js"></script>
   </body>
 </html>
