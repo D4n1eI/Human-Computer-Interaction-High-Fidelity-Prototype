@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <span style="font-weight: bold;">Quiz 1</span>
             <div style="display: flex; gap: 2%;">
               <button class="option">
-                <img src="../assets/icons/play.png" alt="play" class="img-fluid">
+                <a href="quiz-hardcoded.html" style="text-decoration: none; color: inherit;">
+                  <img src="../assets/icons/play.png" alt="play" class="img-fluid">
+                </a>
               </button>
               <button class="option">
                 <img src="../assets/icons/edit.png" alt="edit" class="img-fluid">
