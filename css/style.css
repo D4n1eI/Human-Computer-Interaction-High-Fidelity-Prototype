@@ -144,6 +144,21 @@ body {
     border-bottom: 3px solid var(--hover-color);
   }
 
+  
+  .bg-hci{
+    background-color: #15ce46;
+    --hover-color: #0f9f35;
+  }
+
+  .bg-hci:hover{
+    background-color: var(--hover-color);
+  }
+
+  .nav-tabs .nav-link.bg-hci.active{
+    background-color: var(--hover-color);
+    border-bottom: 3px solid var(--hover-color);
+  }
+
   .bg-add{
     background-color: #ddd;
   }

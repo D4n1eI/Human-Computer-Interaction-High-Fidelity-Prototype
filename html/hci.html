@@ -6,11 +6,10 @@
     <title>CCIII - Studify</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/files.css">
   </head>
   <body class="body d-flex flex-column vh-100">
     <div class="d-flex flex-grow-1">
-      <div id="loadingSpinner" style="display: none;">Loading...</div>  
+      
       <!-- Sidebar -->
       <div class="d-flex flex-column bg-light p-3 sidebar">
         <a href="index.html" class="mb-4 text-center">
@@ -30,7 +29,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link btn-not-implemented">
               <div class="row">
                 <div class="col-6">
                   <img src="../assets/icons/calendar.png" alt="Calendar" width="50" class="img-fluid">
@@ -48,14 +47,14 @@
               <span class="sidebar-text">LAN:</span>
             </div>
             <div class="col-6 text-start">
-              <a href="#" class="nav-link d-inline">
+              <a href="#" class="nav-link d-inline btn-not-implemented">
                 <img src="../assets/icons/united-states.png" alt="lang" width="50" class="language-flag">
               </a>
             </div>
           </div>
           <div class="row align-items-center">
             <div class="col-6 text-end">
-              <a href="#" class="nav-link d-inline">
+              <a href="#" class="nav-link d-inline btn-not-implemented">
                 <img src="../assets/icons/settings.png" alt="Settings" width="50" class="img-fluid">
               </a>
             </div>
@@ -73,8 +72,13 @@
             <!-- Subject Tabs -->
             <ul class="nav nav-tabs mt-auto mb-3 align-items-end" id="subjectTabs">
               <li class="nav-item text-white">
-                <a class="nav-link bg-calculus active subject-tab" aria-current="page" href="cciii.html" style="color: inherit;">
+                <a class="nav-link bg-calculus subject-tab" aria-current="page" href="cciii.html" style="color: inherit;">
                     <span class="fw-bold">CCIII</span>
+                </a>
+              </li>
+              <li class="nav-item text-white">
+                <a class="nav-link bg-hci active subject-tab" aria-current="page" href="hci.html" style="color: inherit;">
+                    <span class="fw-bold">HCI</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -87,7 +91,7 @@
           <div class="col-2"></div>
           <!-- User Button -->
           <div class="col-2 d-flex justify-content-between align-items-center ml-auto mb-4">
-            <button class="btn d-flex align-items-center gap-2 bg-user h-100 w-100">
+            <button class="btn d-flex align-items-center gap-2 bg-user h-100 w-100 btn-not-implemented">
               <img src="../assets/icons/user.png" alt="User Icon" width="50" class="rounded-circle img-fluid">
               <span class="fw-semibold user-profile text-white username">[USERNAME]</span>
             </button>
@@ -96,41 +100,80 @@
         
         <!-- Main Page -->
         <div class="col-10 mt-4">
-          <div class="row mb-4 align-items-center">
-            <div class="col-2 d-flex justify-content-end">
-            <a href="cciii.html" style="font-weight: bolder;">
-                <div class="btn btn-secondary"><</div>
-            </a>
-            </div>
+          <div class="row mb-4">
             <div class="col-6">
               <!-- Section Title -->
-              <h1>Calculus III Files</h1>
+              <h1>Human Computer Interaction</h1>
             </div>
-          </div>
-          <div class="toolbar">
-            <button id="uploadFile" title="Upload File"><i class="icon-upload"></i></button>Upload File
-            <button id="createFolder" title="Create Folder"><i class="icon-folder"></i></button>Create Folder
-          </div>
-          
-          <div id="createFolderModal" class="modal">
-            <div class="modal-content">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2 class="m-0">Create New Folder</h2>
-                <span id="closeModal" class="close" style="font-size: 1.5rem; cursor: pointer;">&times;</span>
-              </div>
-              <input class="mb-2 form-control" type="text" id="folderNameInput" placeholder="Enter folder name" />
-              <div class="d-flex justify-content-center">
-                <button id="confirmCreateFolder" class="btn btn-success">Create</button>
+            <div class="col-2 d-flex">
+              <!-- Alias Badge -->
+              <div class="badge bg-hci d-flex align-items-center justify-content-center" style="height: 100%; font-size: 1.25rem;">
+                <span class="fw-bold">HCI</span>
               </div>
             </div>
+            <div class="col-4 d-flex justify-content-end">
+              <!-- Edit Button Badge -->
+              <button class="btn btn-info d-flex align-items-center justify-content-center btn-not-implemented" style="height: 100%; font-size: 1.25rem;">
+                <img src="../assets/icons/settings.png" alt="Edit" width="50" class="img-fluid">
+              </button>
+            </div>
           </div>
-
-          <div id="fileTree" class="tree-view">
-            <!-- Dynamic tree will appear here -->
+          <div class="col-6 mb-3">
+            <h5>This is Human Computer Interactio</h5>
+          </div>
+          <!-- Features Section -->
+          <div class="row row-cols-2 g-3 mb-4">
+            <div class="col">
+              <a href="#" class="btn-not-implemented">
+                <div class="btn w-100 text-white bg-hci subject-card">
+                  <img src="../assets/icons/folder.png" alt="Files" width="40" class="me-2">
+                  Files
+                </div>
+              </a>
+            </div>
+            <div class="col">
+              <a href="hci-events">
+                <div class="btn w-100 text-white bg-hci subject-card">
+                    <img src="../assets/icons/events.png" alt="Events" width="40" class="me-2">
+                    Events
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="row row-cols-2">
+            <!-- Deadlines Section -->
+            <div class="col">
+                <h5>Close Deadlines:</h5>
+                You have no deadlines here yet!
+            </div>
+            <!-- Study-Button Section -->
+            <div class="col study-button-container d-flex justify-content-end align-items-end">
+              <a href="#" class="study-button-wrapper btn-not-implemented">
+                <img src="../assets/pixel/study-button.png" alt="Study" class="img-fluid study-button">
+              </a>
+            </div>
           </div>
         </div>
       </div>
+      <!-- Not Implemented Modal -->
+      <div class="modal fade" id="notImplementedModal" tabindex="-1" aria-labelledby="notImplementedLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="notImplementedLabel">Feature Not Implemented</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              This feature has not been implemented yet.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/render.js"></script>
-    <script src="../js/files.js"></script>
   </body>
 </html>
