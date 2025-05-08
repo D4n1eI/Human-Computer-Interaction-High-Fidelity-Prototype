@@ -15,9 +15,10 @@
       
       <!-- Sidebar -->
       <div class="d-flex flex-column bg-light p-3" style="width: 220px;">
-        <a href="index.html">
-            <img src="../assets/icons/logo.png" alt="Studify Logo" class="img-fluid" style="max-height: 60px;">
+        <a href="index.html" class="d-flex justify-content-center mb-4">
+          <img src="../assets/icons/logo.png" alt="Studify Logo" class="img-fluid" style="max-height: 60px;">
         </a>
+      
         <ul class="nav flex-column mb-auto">
           <li class="nav-item">
             <a href="generalAI.html" class="nav-link"><div class="row">
@@ -52,12 +53,7 @@
       <!-- Main Content -->
       <div class="flex-grow-1 p-4 col-8 main-content">
 
-        <!-- Back Button (Arrow) -->
-        <div class="mb-4">
-          <button onclick="window.history.back()" class="btn btn-secondary">
-            <i class="bi bi-arrow-left"></i> <!-- Back Arrow Icon -->
-          </button>
-        </div>
+        
 
         <div class="row" style="height: 100px;">        
           <div class="col-8 mt-auto">
@@ -70,16 +66,32 @@
                 <a class="nav-link bg-add subject-tab" href="#" style="color: inherit; font-weight: bolder;">+</a>
               </li>
             </ul>
+            <div class="mb-4 d-flex align-items-center">
+              <a href="index.html" class="btn btn-secondary me-3">
+                <i class="bi bi-arrow-left"></i> <
+              </a>
+              
+              <h3 class="text-dark mb-0">Adding new Subject</h3>
+            </div>
+            
             <form id="create-subject-form" class="p-3 bg-light rounded shadow-sm">
               <div class="mb-3">
-                <label for="subjectName" class="form-label">Subject Name</label>
+                <label for="subjectName" class="form-label">Subject Name <span style="color: red;">*</span></label>
                 <input type="text" class="form-control" id="subjectName" placeholder="Enter subject name">
                 <small id="subjectNameHelp" class="form-text text-muted">Subject name must be between 5 and 34 characters.</small>
               </div>
             
               <div class="mb-3">
-                <label for="subjectAlias" class="form-label">Alias</label>
-                <input type="text" class="form-control" id="subjectAlias" placeholder="Enter alias">
+                <label for="subjectAlias" class="form-label">Alias <span style="color: red;">*</span></label>
+                <span id="alias-tooltip" style="cursor: pointer;">
+                  ?
+                </span>
+                
+                <div class="d-flex align-items-center">
+                  <input type="text" class="form-control" id="subjectAlias" placeholder="Enter alias">
+                  <!-- Tooltip icon -->
+                  
+                </div>
                 <small id="subjectAliasHelp" class="form-text text-muted">Alias must be between 1 and 5 characters.</small>
               </div>
             
@@ -91,14 +103,12 @@
             
               <div class="mb-3">
                 <label for="subjectColor" class="form-label">Subject Color</label>
-                <input type="color" class="form-control form-control-color" id="subjectColor" value="#563d7c" title="Choose your color">
+                <input type="color" class="form-control form-control-color" id="subjectColor" value="#15ce46" title="Only one color allowed" readonly>
               </div>
+              
             
               <button type="submit" class="btn btn-primary w-100">Create Subject</button>
             </form>
-            
-            
-              
           </div>
           <div class="col-2"></div>
           <!-- User Button -->
@@ -108,13 +118,8 @@
               <span class="fw-semibold user-profile text-white username">[USERNAME]</span>
             </button>
           </div>
-          
         </div>
-        <!-- Main page -->
-        <div class="col-10">
         
-          
-        </div>
       </div>
     </div>
     <script src="../js/render.js"></script>
