@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+    <title>Studify</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body class=" body d-flex flex-column vh-100">
+    <div class="d-flex flex-grow-1">
+      <!-- Sidebar -->
+      <div class="d-flex flex-column bg-light p-3 sidebar">
+        <a href="index.html" class="mb-4 text-center">
+          <img src="../assets/icons/logo.png" alt="Studify Logo" class="img-fluid" style="max-height: 60px;">
+        </a>
+        <ul class="nav flex-column mb-auto">
+          <li class="nav-item">
+            <a href="generalAI.html" class="nav-link">
+              <div class="row">
+                <div class="col-6">
+                  <img src="../assets/icons/microchip.png" alt="General Assistant" width="50" class="img-fluid">
+                </div>
+                <div class="col-6">
+                  <h5>General Assistant</h5>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <div class="row">
+                <div class="col-6">
+                  <img src="../assets/icons/calendar.png" alt="Calendar" width="50" class="img-fluid">
+                </div>
+                <div class="col-6">
+                  <h5>Calendar</h5>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <div class="mt-auto d-flex flex-column">
+          <div class="row align-items-center mb-2">
+            <div class="col-6 text-end">
+              <span class="sidebar-text">LAN:</span>
+            </div>
+            <div class="col-6 text-start">
+              <a href="#" class="nav-link d-inline">
+                <img src="../assets/icons/united-states.png" alt="lang" width="50" class="language-flag">
+              </a>
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-6 text-end">
+              <a href="#" class="nav-link d-inline">
+                <img src="../assets/icons/settings.png" alt="Settings" width="50" class="img-fluid">
+              </a>
+            </div>
+            <div class="col-6 text-start text-big">
+              <span class="sidebar-text">Settings</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Main Content -->
+      <div class="flex-grow-1 p-4 col-8 main-content">
+        <div class="row" style="height: 100px;">        
+          <div class="col-8 mt-auto">
+            <!-- Subject Tabs -->
+            <ul class="nav nav-tabs mt-auto mb-3 align-items-end" id="subjectTabs">
+              <li class="nav-item text-white">
+                <a class="nav-link bg-calculus active subject-tab" aria-current="page" href="cciii.html" style="color: inherit; width: 100px;">
+                    <span class="fw-bold">CCIII</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="addsubject.html" class="nav-link bg-add subject-tab" style="color: inherit; font-weight: bolder;">
+                    <span class="fw-bold">+</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-2"></div>
+          <!-- User Button -->
+          <div class="col-2 d-flex justify-content-between align-items-center ml-auto mb-4">
+            <button class="btn d-flex align-items-center gap-2 bg-user h-100 w-100">
+              <img src="../assets/icons/user.png" alt="User Icon" width="50" class="rounded-circle img-fluid">
+              <span class="fw-semibold user-profile text-white username">[USERNAME]</span>
+            </button>
+          </div>
+        </div>
+        <!-- Main page -->
+        <div class="col-10">
+          <!-- AI Quiz Taking Page -->
+          <h2 class="mb-4" style="text-align: center;">Quiz</h2>
+          <div style="display: flex; align-items: center; margin-bottom: 2%;">
+            <div class="d-flex justify-content-end" style="position: relative; left: 5%;">
+              <a href="ciii-study-quiz.html" style="font-weight: bolder;">
+                  <div class="btn btn-secondary"><</div>
+              </a>
+            </div>
+            <img src="../assets/pixel/var6_normal.png" style="position: relative; left: 15%; width: 10%;">
+            <div class="speech-bubble-left" style="top: 25%; left: 20%;">This question is super important for your study, I swear it is! Like, look closely: I'm really asking something relevant, I think. But what could the right answer be? Nobody knows, maybe not even me. It could be A, it could be B, maybe C, or who knows, D just to throw you off. This even seems easy, but don't be fooled — it's kind of tricky, kind of confusing, but all part of the mental training! Come on, focus. You got this. Or not. Who knows? Just go for it!</div>
+          </div>
+          <div class="container">
+            <div class="row text-center">
+              <div class="col-md-6 mb-3">
+                <button class="option" style="width: 75%; height: 200%; top: 50%; left: 22.5%; display: flex; align-items: center; justify-content: flex-start;">
+                    <span style="font-weight: bold; margin-right: 3%; font-size: 2.5rem;">A</span>
+                    <div style="border-left: 1px solid black; height: 100%; margin-right: 1%;"></div>
+                    <span>A completely random answer</span>
+                </button>
+              </div>
+              <div class="col-md-6 mb-3">
+                <button class="option" style="width: 75%; height: 200%; top: 50%; left: 2.5%; display: flex; align-items: center; justify-content: flex-start;">
+                    <span style="font-weight: bold; margin-right: 3%; font-size: 2.5rem;">B</span>
+                    <div style="border-left: 1px solid black; height: 100%; margin-right: 2%;"></div>
+                    <span>Maybe it's this one, who knows?</span>
+                </button>
+              </div>
+              <div class="col-md-6 mb-3">
+                <button class="option" style="width: 75%; height: 200%; top: 150%; left: 22.5%; display: flex; align-items: center; justify-content: flex-start;">
+                    <span style="font-weight: bold; margin-right: 3%; font-size: 2.5rem;">C</span>
+                    <div style="border-left: 1px solid black; height: 100%; margin-right: 1%;"></div>
+                    <span>Hmm… this one seems right, no?</span>
+                </button>
+              </div>
+              <div class="col-md-6 mb-3">
+                <button class="option" style="width: 75%; height: 200%; top: 150%; left: 2.5%; display: flex; align-items: center; justify-content: flex-start;">
+                    <span style="font-weight: bold; margin-right: 3%; font-size: 2.5rem;">D</span>
+                    <div style="border-left: 1px solid black; height: 100%; margin-right: 2%;"></div>
+                    <span>Pick this one just because!</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/render.js"></script>
+  </body>
+</html>
+
+
