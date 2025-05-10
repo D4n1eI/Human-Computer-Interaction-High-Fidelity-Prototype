@@ -13,27 +13,146 @@ document.addEventListener('DOMContentLoaded', () => {
   
     async function loadFolder() {
       try {
+        showLoadingSpinner(true); // Show spinner
         const entries = await api.readFolder(currentFolder);
         fileTreeContainer.innerHTML = ''; // Clear the container
         renderTree(entries, fileTreeContainer);
       } catch (error) {
         console.error('Error loading folder:', error);
+      } finally {
+        showLoadingSpinner(false); // Hide spinner
       }
     }
   
-    createFolderButton.onclick = async () => {
-      const folderName = prompt('Enter the name of the new folder:');
-      if (folderName) {
-        const result = await api.createFolder(currentFolder, folderName);
+    function renderTree(data, parentElement) {
+      data.forEach((item) => {
+        const node = document.createElement('div');
+        node.classList.add('tree-node');
+  
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('item');
+  
+        const icon = document.createElement('img');
+        icon.src = item.type === 'folder' ? 'assets/icons/folder-icon.svg' : 'assets/icons/file-icon.svg';
+        itemDiv.appendChild(icon);
+  
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = item.name;
+        itemDiv.appendChild(nameSpan);
+  
+        const actions = document.createElement('div');
+        actions.classList.add('actions');
+        actions.style.display = 'none';
+  
+        // Upload Button (only for folders)
+        if (item.type === 'folder') {
+          const uploadBtn = document.createElement('button');
+          uploadBtn.innerHTML = `<img src="assets/icons/upload-icon.svg" alt="Upload">`;
+          uploadBtn.onclick = async (e) => {
+            e.stopPropagation();
+            const confirmUpload = confirm(`Do you want to upload a file to "${item.name}"?`);
+            if (confirmUpload) {
+              console.log(`Uploading to: ${item.name}`);
+              const result = await api.uploadFile(item.fullPath);
+              if (result.success) {
+                console.log('File uploaded:', result.fileName);
+                loadFolder(); // Reload the folder
+              } else {
+                console.error('Error uploading file:', result.error);
+              }
+            }
+          };
+          actions.appendChild(uploadBtn);
+        }
+  
+        // Download Button
+        const downloadBtn = document.createElement('button');
+        downloadBtn.innerHTML = `<img src="assets/icons/download-icon.svg" alt="Download">`;
+        downloadBtn.onclick = async (e) => {
+          e.stopPropagation();
+          console.log(`Downloading: ${item.name}`);
+          const result = await api.downloadFile(item.fullPath);
+          if (result.success) {
+            console.log('Downloaded:', item.fullPath);
+          } else {
+            console.error('Error downloading file or folder:', result.error);
+          }
+        };
+        actions.appendChild(downloadBtn);
+  
+        // Delete Button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerHTML = `<img src="assets/icons/delete-icon.svg" alt="Delete">`;
+        deleteBtn.onclick = async (e) => {
+          e.stopPropagation();
+          const confirmDelete = confirm(`Are you sure you want to delete "${item.name}"?`);
+          if (confirmDelete) {
+            console.log(`Deleting: ${item.name}`);
+            const result = await api.deleteFile(item.fullPath);
+            if (result.success) {
+              console.log('Deleted:', item.fullPath);
+              loadFolder(); // Reload the folder structure
+            } else {
+              console.error('Error deleting file or folder:', result.error);
+            }
+          }
+        };
+        actions.appendChild(deleteBtn);
+  
+        itemDiv.appendChild(actions);
+        node.appendChild(itemDiv);
+  
+        itemDiv.onmouseenter = () => {
+          actions.style.display = 'flex';
+        };
+  
+        itemDiv.onmouseleave = () => {
+          actions.style.display = 'none';
+        };
+  
+        if (item.type === 'folder') {
+          const childrenContainer = document.createElement('div');
+          childrenContainer.classList.add('children');
+          childrenContainer.style.display = 'none';
+  
+          itemDiv.onclick = async (e) => {
+            if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'IMG') {
+              if (childrenContainer.childElementCount === 0) {
+                const entries = await api.readFolder(item.fullPath);
+                renderTree(entries, childrenContainer);
+              }
+              childrenContainer.style.display =
+                childrenContainer.style.display === 'none' ? 'block' : 'none';
+            }
+          };
+          node.appendChild(childrenContainer);
+        }
+  
+        parentElement.appendChild(node);
+      });
+    }
+  
+    // Show or hide the loading spinner
+    function showLoadingSpinner(show) {
+      const spinner = document.getElementById('loadingSpinner');
+      spinner.style.display = show ? 'block' : 'none';
+    }
+  
+    // Toolbar Buttons
+    uploadButton.onclick = async (e) => {
+      e.stopPropagation();
+      const confirmUpload = confirm(`Do you want to upload a file to the current folder "${currentFolder}"?`);
+      if (confirmUpload) {
+        const result = await api.uploadFile(currentFolder);
         if (result.success) {
-          console.log(`Folder created: ${folderName}`);
-          loadFolder(); // Reload the folder structure
+          console.log('File uploaded:', result.fileName);
+          loadFolder(); // Reload the folder
         } else {
-          console.error('Error creating folder:', result.error);
+          console.error('Error uploading file:', result.error);
         }
       }
     };
-
+  
     createFolderButton.onclick = () => {
       createFolderModal.style.display = 'block'; // Show the modal
     };
@@ -63,155 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (event.target === createFolderModal) {
         createFolderModal.style.display = 'none';
         folderNameInput.value = ''; // Clear the input
-      }
-    };
-
-    function renderTree(data, parentElement) {
-      data.forEach((item) => {
-        const node = document.createElement('div');
-        node.classList.add('tree-node');
-    
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('item');
-    
-        const icon = document.createElement('img');
-        icon.src = item.type === 'folder' ? 'assets/icons/folder-icon.svg' : 'assets/icons/file-icon.svg';
-        itemDiv.appendChild(icon);
-    
-        const nameSpan = document.createElement('span');
-        nameSpan.textContent = item.name;
-        itemDiv.appendChild(nameSpan);
-    
-        const actions = document.createElement('div');
-        actions.classList.add('actions');
-        actions.style.display = 'none';
-
-        // Upload Button (only for folders)
-        if (item.type === 'folder') {
-          const uploadBtn = document.createElement('button');
-          uploadBtn.innerHTML = `<img src="assets/icons/upload-icon.svg" alt="Upload">`;
-          uploadBtn.onclick = async (e) => {
-            e.stopPropagation();
-            const confirmUpload = confirm(`Do you want to upload a file to "${item.name}"?`);
-            if (confirmUpload) {
-              console.log(`Uploading to: ${item.name}`);
-              const result = await api.uploadFile(item.fullPath);
-              if (result.success) {
-                console.log('File uploaded:', result.fileName);
-                loadFolder(); // Reload the folder
-              } else {
-                console.error('Error uploading file:', result.error);
-              }
-            }
-          };
-          actions.appendChild(uploadBtn);
-        }
-    
-        // Download Button
-        const downloadBtn = document.createElement('button');
-        downloadBtn.innerHTML = `<img src="assets/icons/download-icon.svg" alt="Download">`;
-        downloadBtn.onclick = async (e) => {
-          e.stopPropagation();
-          console.log(`Downloading: ${item.name}`);
-          const result = await api.downloadFile(item.fullPath);
-          if (result.success) {
-            console.log('Downloaded:', item.fullPath);
-          } else {
-            console.error('Error downloading file or folder:', result.error);
-          }
-        };
-        actions.appendChild(downloadBtn);
-    
-        // Delete Button
-        const deleteBtn = document.createElement('button');
-        deleteBtn.innerHTML = `<img src="assets/icons/delete-icon.svg" alt="Delete">`;
-        deleteBtn.onclick = async (e) => {
-          e.stopPropagation();
-          const confirmDelete = confirm(`Are you sure you want to delete "${item.name}"?`);
-          if (confirmDelete) {
-            console.log(`Deleting: ${item.name}`);
-            const result = await api.deleteFile(item.fullPath);
-            if (result.success) {
-              console.log('Deleted:', item.fullPath);
-              loadFolder(); // Reload the folder structure
-            } else {
-              console.error('Error deleting file or folder:', result.error);
-            }
-          }
-        };
-        actions.appendChild(deleteBtn);
-    
-        itemDiv.appendChild(actions);
-        node.appendChild(itemDiv);
-    
-        itemDiv.onmouseenter = () => {
-          actions.style.display = 'flex';
-        };
-    
-        itemDiv.onmouseleave = () => {
-          actions.style.display = 'none';
-        };
-    
-        if (item.type === 'folder') {
-          const childrenContainer = document.createElement('div');
-          childrenContainer.classList.add('children');
-          childrenContainer.style.display = 'none';
-    
-          itemDiv.onclick = async (e) => {
-            if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'IMG') {
-              if (childrenContainer.childElementCount === 0) {
-                const entries = await api.readFolder(item.fullPath);
-                renderTree(entries, childrenContainer);
-              }
-              childrenContainer.style.display =
-                childrenContainer.style.display === 'none' ? 'block' : 'none';
-            }
-          };
-          node.appendChild(childrenContainer);
-        }
-    
-        parentElement.appendChild(node);
-      });
-    }
-  
-    uploadButton.onclick = async (e) => {
-      e.stopPropagation();
-      const confirmUpload = confirm(`Do you want to upload a file to the current folder "${currentFolder}"?`);
-      if (confirmUpload) {
-        const result = await api.uploadFile(currentFolder);
-        if (result.success) {
-          console.log('File uploaded:', result.fileName);
-          loadFolder(); // Reload the folder
-        } else {
-          console.error('Error uploading file:', result.error);
-        }
-      }
-    };
-  
-    deleteButton.onclick = async (e) => {
-      e.stopPropagation();
-      const confirmDelete = confirm(`Are you sure you want to delete the item current folder"${item.name}"?`);
-      if (confirmDelete) {
-        const result = await api.deleteFile(item.fullPath);
-        if (result.success) {
-          console.log('Deleted:', item.fullPath);
-          loadFolder(); // Reload the folder structure
-        } else {
-          console.error('Error deleting file or folder:', result.error);
-        }
-      }
-    };
-  
-    downloadButton.onclick = async (e) => {
-      e.stopPropagation();
-      const confirmDownload = confirm(`Do you want to download "${item.name}"?`);
-      if (confirmDownload) {
-        const result = await api.downloadFile(item.fullPath);
-        if (result.success) {
-          console.log('Downloaded:', item.fullPath);
-        } else {
-          console.error('Error downloading file or folder:', result.error);
-        }
       }
     };
   
