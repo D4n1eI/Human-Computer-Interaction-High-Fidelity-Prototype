@@ -204,4 +204,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadFolder(); // Load the initial folder structure
 }
+if (currentPath.includes("index.html")) {
+  const subjectsSection = document.querySelector('.row.row-cols-3.g-3'); // Subjects Section
+
+  // Check the boolean flag
+  const subjectCreated = sessionStorage.getItem("subjectCreated") === "true";
+  if (subjectCreated) {
+    const subjects = JSON.parse(sessionStorage.getItem("subjects") || "[]");
+    subjects.forEach(subject => {
+      addSubjectToSection(subject.name, subject.alias, subject.color, subjectsSection);
+    });
+  }
+
+  function addSubjectToSection(name, alias, color, parentElement) {
+    // Prevent duplicate entries
+    if (document.querySelector(`.subject-card[title="${name}"]`)) {
+      return;
+    }
+
+    const newSubjectDiv = document.createElement('div');
+    newSubjectDiv.className = 'col';
+
+    const newSubjectLink = document.createElement('a');
+    newSubjectLink.href = 'hci.html'; // Link to the HCI page
+    newSubjectLink.className = 'btn w-100 bg-hci text-white subject-card';
+    newSubjectLink.textContent = alias;
+    newSubjectLink.title = name;
+
+    // Insert the new subject before the "Add Subject" button
+    const addSubjectButton = parentElement.querySelector('.btn-outline-secondary');
+    parentElement.insertBefore(newSubjectDiv, addSubjectButton.parentElement);
+
+    newSubjectDiv.appendChild(newSubjectLink);
+  }
+}
 });
