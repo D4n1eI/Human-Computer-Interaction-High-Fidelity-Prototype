@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
-    <title>CCIII - Studify</title>
+    <title>Studify</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
   </head>
@@ -72,8 +72,13 @@
             <!-- Subject Tabs -->
             <ul class="nav nav-tabs mt-auto mb-3 align-items-end" id="subjectTabs">
               <li class="nav-item text-white">
-                <a class="nav-link bg-calculus active subject-tab" aria-current="page" href="cciii.html" style="color: inherit;">
+                <a class="nav-link bg-calculus subject-tab" aria-current="page" href="cciii.html" style="color: inherit;">
                     <span class="fw-bold">CCIII</span>
+                </a>
+              </li>
+              <li class="nav-item text-white">
+                <a class="nav-link bg-hci active subject-tab" aria-current="page" href="hci.html" style="color: inherit;">
+                    <span class="fw-bold">HCI</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -95,61 +100,42 @@
         
         <!-- Main Page -->
         <div class="col-10 mt-4">
-          <div class="row mb-4">
-            <div class="col-6">
-              <!-- Section Title -->
-              <h1>Calculus III</h1>
+          <!-- Add Bar -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>HCI Deadlines</h1>
+            <button id="addEventButton" class="btn btn-primary">Add</button>
+          </div>
+
+          <!-- Add Form -->
+          <div id="addEventForm" class="p-3 bg-light rounded shadow-sm d-none">
+            <div class="mb-3">
+              <button id="addStudySession" class="btn btn-secondary me-3 btn-not-implemented">Study Session</button>
+              <button id="addDeadline" class="btn btn-secondary">Deadline</button>
             </div>
-            <div class="col-2 d-flex">
-              <!-- Alias Badge -->
-              <div class="badge bg-calculus d-flex align-items-center justify-content-center" style="height: 50px; font-size: 1.25rem;">
-                <span class="fw-bold">CCIII</span>
+            <div id="deadlineForm" class="d-none">
+              <div class="mb-3">
+                <label for="deadlineName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="deadlineName" placeholder="Enter deadline name">
               </div>
-            </div>
-            <div class="col-4 d-flex justify-content-end">
-              <!-- Edit Button Badge -->
-              <button class="btn btn-info d-flex align-items-center justify-content-center btn-not-implemented" style="height: 50px; font-size: 1.25rem;">
-                <img src="../assets/icons/settings.png" alt="Edit" width="50" class="img-fluid">
-              </button>
-            </div>
-          </div>
-          <div class="col-6 mb-3">
-            <h5>Calculus III is very, very difficult, so I need to study a lot if I want to get good grade!</h5>
-          </div>
-          <!-- Features Section -->
-          <div class="row row-cols-2 g-3 mb-4">
-            <div class="col">
-              <a href="cciii-files.html">
-                <div class="btn w-100 text-white bg-calculus subject-card">
-                  <img src="../assets/icons/folder.png" alt="Files" width="40" class="me-2">
-                  Files
-                </div>
-              </a>
-            </div>
-            <div class="col">
-              <button class="btn w-100 text-white bg-calculus subject-card">
-                <img src="../assets/icons/events.png" alt="Events" width="40" class="me-2">
-                Events
-              </button>
+              <div class="mb-3">
+                <label for="deadlineDate" class="form-label">Date</label>
+                <input type="date" class="form-control" id="deadlineDate" min="">
+              </div>
+              <div class="mb-3">
+                <label for="deadlineTime" class="form-label">Time</label>
+                <input type="time" class="form-control" id="deadlineTime">
+              </div>
+              <div class="mb-3">
+                <label for="deadlineDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="deadlineDescription" placeholder="Enter description"></textarea>
+              </div>
+              <button id="createDeadlineButton" class="btn btn-primary w-100">Create</button>
             </div>
           </div>
-          <div class="row row-cols-2">
-            <!-- Deadlines Section -->
-            <div class="col">
-              <h5>Close Deadlines:</h5>
-              <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center bg-calculus text-white deadline-card">
-                  Calculus III Test
-                  <span class="badge">23/06/2025 13:00</span>
-                </li>
-              </ul>
-            </div>
-            <!-- Study-Button Section -->
-            <div class="col study-button-container d-flex justify-content-end align-items-end">
-              <a href="cciii-study.html" class="study-button-wrapper">
-                <img src="../assets/pixel/study-buttonCIII.png" alt="Study" class="img-fluid study-button btn-calculus">
-              </a>
-            </div>
+
+          <!-- Deadlines List -->
+          <div id="deadlinesList" class="mt-4">
+            <p id="noDeadlinesMessage">There are no deadlines.</p>
           </div>
         </div>
       </div>

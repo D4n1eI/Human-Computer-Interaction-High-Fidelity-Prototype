@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   // Now use the api object from preload.js
-  if (!currentPath.includes("hci.html")){
+  if (!currentPath.includes("hci.html") && !currentPath.includes("hci-events.html")){
     const subjectTabs = document.getElementById('subjectTabs');
   
     // Check the boolean flag
@@ -246,5 +246,72 @@ if (currentPath.includes("index.html")) {
 
     newSubjectDiv.appendChild(newSubjectLink);
   }
+}
+if (currentPath.includes("hci-events.html")) {
+  const addEventButton = document.getElementById("addEventButton");
+  const addEventForm = document.getElementById("addEventForm");
+  const addDeadlineButton = document.getElementById("addDeadline");
+  const deadlineForm = document.getElementById("deadlineForm");
+  const createDeadlineButton = document.getElementById("createDeadlineButton");
+  const deadlinesList = document.getElementById("deadlinesList");
+  const noDeadlinesMessage = document.getElementById("noDeadlinesMessage");
+
+  // Show the Add Form
+  addEventButton.addEventListener("click", () => {
+    addEventForm.classList.toggle("d-none");
+  });
+
+  // Show Deadline Form
+  addDeadlineButton.addEventListener("click", () => {
+    deadlineForm.classList.remove("d-none");
+  });
+
+  // Create Deadline
+  createDeadlineButton.addEventListener("click", () => {
+    const name = document.getElementById("deadlineName").value.trim();
+    const date = document.getElementById("deadlineDate").value;
+    const time = document.getElementById("deadlineTime").value;
+    const description = document.getElementById("deadlineDescription").value.trim();
+
+    // Validation
+    if (!name || !date || !time || !description) {
+      alert("All fields are required.");
+      return;
+    }
+
+    // Artificial Validation
+    if (name !== "HCI Test" || description !== "Main topics:\n1- High Fidelity Prototypes\n2- SUS score") {
+      alert("Validation failed. Please ensure all fields match the test values.");
+      return;
+    }
+
+    const [year, month, day] = date.split("-");
+    const formattedDate = `${day}/${month}/${year}`;
+
+    // Add Deadline to List
+    const deadlinesListUL = document.createElement("ul");
+    deadlinesListUL.className = "list-group";
+    deadlinesList.appendChild(deadlinesListUL)
+    const deadlineItem = document.createElement("li");
+    deadlineItem.className = "list-group-item d-flex justify-content-between align-items-center bg-hci text-white deadline-card";
+    deadlineItem.innerHTML = `
+      <div>
+        <h6>${name}</h6>
+      </div>
+      <span>${formattedDate} ${time}</span>
+    `;
+    deadlinesListUL.appendChild(deadlineItem);
+
+    // Hide No Deadlines Message
+    noDeadlinesMessage.classList.add("d-none");
+
+    // Reset Form
+    addEventForm.classList.add("d-none");
+    deadlineForm.classList.add("d-none");
+    document.getElementById("deadlineName").value = "";
+    document.getElementById("deadlineDate").value = "";
+    document.getElementById("deadlineTime").value = "";
+    document.getElementById("deadlineDescription").value = "";
+  });
 }
 });
