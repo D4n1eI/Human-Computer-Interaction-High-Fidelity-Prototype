@@ -21,6 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const subjectAliasInput = document.getElementById('subjectAlias');
     const subjectDescriptionInput = document.getElementById('subjectDescription');
     const subjectColorInput = document.getElementById('subjectColor');
+
+        // Tooltip functionality for Alias
+    const aliasTooltip = document.getElementById('alias-tooltip');
+    const tooltip = document.getElementById('tooltip');
+
+    aliasTooltip.addEventListener('click', () => {
+      // Toggle tooltip visibility
+      tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
+    });
   
     createForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -238,82 +247,4 @@ if (currentPath.includes("index.html")) {
     newSubjectDiv.appendChild(newSubjectLink);
   }
 }
-});
-document.addEventListener('DOMContentLoaded', () => {
-  const currentPath = window.location.pathname;
-
-  if (currentPath.includes("addsubject.html")) {
-    const createForm = document.getElementById('create-subject-form');
-    const subjectNameInput = document.getElementById('subjectName');
-    const subjectAliasInput = document.getElementById('subjectAlias');
-    const subjectDescriptionInput = document.getElementById('subjectDescription');
-    const subjectColorInput = document.getElementById('subjectColor');
-    const subjectTabs = document.getElementById('subjectTabs');
-
-    // Tooltip functionality for Alias
-    const aliasTooltip = document.getElementById('alias-tooltip');
-    const tooltip = document.getElementById('tooltip');
-
-    aliasTooltip.addEventListener('click', () => {
-      // Toggle tooltip visibility
-      tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.addEventListener('click', (event) => {
-      // Close tooltip if clicking outside
-      if (!aliasTooltip.contains(event.target) && !tooltip.contains(event.target)) {
-        tooltip.style.display = 'none';
-      }
-    });
-
-    // Handle form submission
-    createForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const name = subjectNameInput.value.trim();
-      const alias = subjectAliasInput.value.trim();
-      const description = subjectDescriptionInput.value.trim();
-      const color = subjectColorInput.value;
-
-      // Validation: Only allow "Human Computer Interaction" with alias "HCI"
-      if (
-        name !== "Human Computer Interaction" ||
-        alias !== "HCI" ||
-        description !== "This is Human Computer Interaction!" ||
-        color !== "#15ce46"
-      ) {
-        alert("Validation failed. Only 'Human Computer Interaction' with alias 'HCI' is allowed.");
-        return;
-      }
-
-      // Add the subject to the top bar
-      addSubjectToTabs(alias, color);
-
-      // Reset the form
-      createForm.reset();
-      subjectColorInput.value = "#15ce46"; // Reset to fixed color
-    });
-
-    function addSubjectToTabs(alias, color) {
-      const newTab = document.createElement('li');
-      newTab.className = 'nav-item text-white';
-
-      const newLink = document.createElement('a');
-      newLink.className = 'nav-link subject-tab';
-      newLink.href = 'hci.html'; // Link to the HCI page
-      newLink.style.color = 'inherit';
-      newLink.style.width = '100px';
-      newLink.style.backgroundColor = color;
-      newLink.style.fontWeight = 'bold';
-      newLink.textContent = alias;
-
-      newTab.appendChild(newLink);
-
-      // Insert the new tab next to "CIII" and before "+"
-      const ciiiTab = Array.from(subjectTabs.children).find(tab =>
-        tab.querySelector('.nav-link')?.textContent === 'CCIII'
-      );
-      subjectTabs.insertBefore(newTab, ciiiTab.nextSibling);
-    }
-  }
 });

@@ -161,10 +161,16 @@ body {
 
   .bg-add{
     background-color: #ddd;
+    --hover-color: #b6b5b5;
   }
 
   .bg-add:hover{
-    background-color: #b6b5b5;
+    background-color: var(--hover-color);
+  }
+
+    .nav-tabs .nav-link.bg-add.active{
+    background-color: var(--hover-color);
+    border-bottom: 3px solid var(--hover-color);
   }
   
 /* Remove the gap between the tabs and the line */
@@ -203,8 +209,15 @@ body {
 }
 
 .study-button:hover {
-  content: url(../assets/pixel/study-buttonCIII.png); /* Change image on hover */
   transform: scale(1.05); /* Scale the button */
+}
+
+.btn-calculus.study-button:hover {
+  content: url(../assets/pixel/study-hoverCIII.png); /* Change image on hover */
+}
+
+.btn-hci.study-button:hover {
+  content: url(../assets/pixel/study-hoverHCI.png); /* Change image on hover */
 }
 
 .speech-bubble-left { /* Needs updates to include the little "arrow" in the left */
