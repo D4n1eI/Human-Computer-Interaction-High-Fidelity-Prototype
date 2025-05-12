@@ -95,14 +95,15 @@
           
             <div class="mb-3">
               <label for="subjectAlias" class="form-label">Alias <span style="color: red;">*</span></label>
-              <span id="alias-tooltip" style="cursor: pointer;">
+              <span id="alias-tooltip" style="cursor: pointer; position: relative;">
                 ?
+                <!-- Tooltip content -->
+                <div id="tooltip" style="display: none; position: absolute; top: 20px; left: 0; background: #f8f9fa; border: 1px solid #ccc; padding: 5px; border-radius: 5px; font-size: 0.9rem; z-index: 10; width: 250px;">
+                  The alias is an acronym for the subject (e.g., HCI for Human-Computer Interaction).
+                </div>
               </span>
-              
               <div class="d-flex align-items-center">
                 <input type="text" class="form-control" id="subjectAlias" placeholder="Enter alias">
-                <!-- Tooltip icon -->
-                
               </div>
               <small id="subjectAliasHelp" class="form-text text-muted">Alias must be between 1 and 5 characters.</small>
             </div>

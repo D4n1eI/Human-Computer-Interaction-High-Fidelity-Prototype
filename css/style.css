@@ -203,7 +203,7 @@ body {
 }
 
 .study-button:hover {
-  content: url(../assets/pixel/study-hover.png); /* Change image on hover */
+  content: url(../assets/pixel/study-buttonCIII.png); /* Change image on hover */
   transform: scale(1.05); /* Scale the button */
 }
 
