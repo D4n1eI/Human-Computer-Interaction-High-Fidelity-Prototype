@@ -2,14 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
     <title>Studify</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../node_modules/clockpicker/dist/bootstrap-clockpicker.min.css">
   </head>
-  <body class=" body d-flex flex-column vh-100">
+  <body class="body d-flex flex-column vh-100">
     <div class="d-flex flex-grow-1">
+      
       <!-- Sidebar -->
       <div class="d-flex flex-column bg-light p-3 sidebar">
         <a href="index.html" class="mb-4 text-center">
@@ -29,8 +30,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <div class="row btn-not-implemented">
+            <a href="#" class="nav-link btn-not-implemented">
+              <div class="row">
                 <div class="col-6">
                   <img src="../assets/icons/calendar.png" alt="Calendar" width="50" class="img-fluid">
                 </div>
@@ -64,6 +65,7 @@
           </div>
         </div>
       </div>
+      
       <!-- Main Content -->
       <div class="flex-grow-1 p-4 col-8 main-content">
         <div class="row" style="height: 100px;">        
@@ -71,12 +73,17 @@
             <!-- Subject Tabs -->
             <ul class="nav nav-tabs mt-auto mb-3 align-items-end" id="subjectTabs">
               <li class="nav-item text-white">
-                <a class="nav-link bg-calculus subject-tab" aria-current="page" href="cciii.html" style="color: inherit; width: 100px;">
+                <a class="nav-link bg-calculus subject-tab" aria-current="page" href="cciii.html" style="color: inherit;">
                     <span class="fw-bold">CCIII</span>
                 </a>
               </li>
+              <li class="nav-item text-white">
+                <a class="nav-link bg-hci active subject-tab" aria-current="page" href="hci.html" style="color: inherit;">
+                    <span class="fw-bold">HCI</span>
+                </a>
+              </li>
               <li class="nav-item">
-                <a href="addsubject.html" class="nav-link bg-add subject-tab" style="color: inherit; font-weight: bolder;">
+                <a href="addsubject.html" class="nav-link bg-add subject-tab" style="color: inherit;">
                     <span class="fw-bold">+</span>
                 </a>
               </li>
@@ -91,27 +98,51 @@
             </button>
           </div>
         </div>
-        <!-- Main page -->
-        <div class="col-10">
-          <!-- General Assistant -->
-          <div style="display: flex; position: relative; top: 0; left: 5%; align-items: center;">
-            <a href="index.html" style="position: relative; font-weight: bolder;  width: 25%;">
-              <div class="btn btn-secondary" style="margin-top: 2%;"><</div>
-            </a>
-            <h2 class="mb-4" style="position: relative;">General Assistant</h2>
+        
+        <!-- Main Page -->
+        <div class="col-10 mt-4">
+          <!-- Add Bar -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>HCI Deadlines</h1>
+            <button id="addEventButton" class="btn btn-primary">Add</button>
           </div>
-          
-          <div id="default-header" style="display: flex; align-items: center;">
-            <img src="../assets/pixel/var1_normal.png" style="position: relative; left: 15%; width: 10%;">
-            <div class="speech-bubble-left" style="top: 25%; left: 20%;">Hello there! How can I help?</div>
-          </div>
-          <div id="user-ai-interaction" style="left: -10%; right: 0; padding: 1%; background: #fff;"></div>
-          <div style="position: fixed; bottom: 0; left: -10%; right: 0; padding: 1%; background: #fff;">
-            <div style="border-top: 2px solid #ccc; width: 50%; margin: 0 auto;">
-                <button style="width: 5%; padding: 8px; margin-top: 1%;" class="btn-not-implemented">+</button>
-                <input id="message" type="text" placeholder="Ask a question..." style="width: 88.5%; padding: 8px; margin-top: 1%;">
-                <button id="send" class="option" style="width: 5%; padding: 8px; margin-top: 1%;">></button>
+
+          <!-- Add Form -->
+          <div id="addEventForm" class="p-3 bg-light rounded shadow-sm d-none">
+            <div class="mb-3">
+              <button id="addStudySession" class="btn btn-secondary me-3 btn-not-implemented">Study Session</button>
+              <button id="addDeadline" class="btn btn-secondary">Deadline</button>
             </div>
+            <div id="deadlineForm" class="d-none">
+              <div class="mb-3">
+                <label for="deadlineName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="deadlineName" placeholder="Enter deadline name">
+              </div>
+              <div class="mb-3">
+                <label for="deadlineDate" class="form-label">Date</label>
+                <input type="date" class="form-control" id="deadlineDate" min="">
+              </div>
+              <div class="mb-3">
+                <label for="deadlineTime" class="form-label">Time</label>
+                <div class="input-group clockpicker">
+                  <input type="text" class="form-control" id="deadlineTime" placeholder="Select time">
+                  <span class="input-group-text">
+                    <i class="bi bi-clock"></i>
+                  </span>
+                </div>
+                <div id="clockPickerContainer" style="position: relative; height: 0;"></div>
+              </div>
+              <div class="mb-3">
+                <label for="deadlineDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="deadlineDescription" placeholder="Enter description"></textarea>
+              </div>
+              <button id="createDeadlineButton" class="btn btn-primary w-100">Create</button>
+            </div>
+          </div>
+
+          <!-- Deadlines List -->
+          <div id="deadlinesList" class="mt-4">
+            <p id="noDeadlinesMessage">There are no deadlines.</p>
           </div>
         </div>
       </div>
@@ -133,8 +164,9 @@
         </div>
       </div>
     </div>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/generalAI.js"></script>
+    <script src="../node_modules/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
     <script src="../js/render.js"></script>
   </body>
 </html>

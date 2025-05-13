@@ -21,6 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const subjectAliasInput = document.getElementById('subjectAlias');
     const subjectDescriptionInput = document.getElementById('subjectDescription');
     const subjectColorInput = document.getElementById('subjectColor');
+
+        // Tooltip functionality for Alias
+    const aliasTooltip = document.getElementById('alias-tooltip');
+    const tooltip = document.getElementById('tooltip');
+
+    aliasTooltip.addEventListener('click', () => {
+      // Toggle tooltip visibility
+      tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
+    });
   
     createForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -74,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   // Now use the api object from preload.js
-  if (!currentPath.includes("hci.html")){
+  if (!currentPath.includes("hci.html") && !currentPath.includes("hci-events.html")){
     const subjectTabs = document.getElementById('subjectTabs');
   
     // Check the boolean flag
@@ -238,82 +247,88 @@ if (currentPath.includes("index.html")) {
     newSubjectDiv.appendChild(newSubjectLink);
   }
 }
-});
-document.addEventListener('DOMContentLoaded', () => {
-  const currentPath = window.location.pathname;
+if (currentPath.includes("hci-events.html")) {
+  const addEventButton = document.getElementById("addEventButton");
+  const addEventForm = document.getElementById("addEventForm");
+  const addDeadlineButton = document.getElementById("addDeadline");
+  const deadlineForm = document.getElementById("deadlineForm");
+  const createDeadlineButton = document.getElementById("createDeadlineButton");
+  const deadlinesList = document.getElementById("deadlinesList");
+  const noDeadlinesMessage = document.getElementById("noDeadlinesMessage");
 
-  if (currentPath.includes("addsubject.html")) {
-    const createForm = document.getElementById('create-subject-form');
-    const subjectNameInput = document.getElementById('subjectName');
-    const subjectAliasInput = document.getElementById('subjectAlias');
-    const subjectDescriptionInput = document.getElementById('subjectDescription');
-    const subjectColorInput = document.getElementById('subjectColor');
-    const subjectTabs = document.getElementById('subjectTabs');
+  // Initialize Clock Picker
+  const clockPicker = document.querySelector(".clockpicker");
+  $(clockPicker).clockpicker({
+    autoclose: true,
+    default: "now",
+    placement: "top", // Position the clock picker above the input field
+    align: "left"     // Align the clock picker with the left edge of the input field
+  });
 
-    // Tooltip functionality for Alias
-    const aliasTooltip = document.getElementById('alias-tooltip');
-    const tooltip = document.getElementById('tooltip');
+  // Show the Add Form
+  addEventButton.addEventListener("click", () => {
+    addEventForm.classList.toggle("d-none");
+  });
 
-    aliasTooltip.addEventListener('click', () => {
-      // Toggle tooltip visibility
-      tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
-    });
+  // Show Deadline Form
+  addDeadlineButton.addEventListener("click", () => {
+    deadlineForm.classList.remove("d-none");
+  });
 
-    document.addEventListener('click', (event) => {
-      // Close tooltip if clicking outside
-      if (!aliasTooltip.contains(event.target) && !tooltip.contains(event.target)) {
-        tooltip.style.display = 'none';
-      }
-    });
+  // Create Deadline
+  createDeadlineButton.addEventListener("click", () => {
+    const name = document.getElementById("deadlineName").value.trim();
+    const date = document.getElementById("deadlineDate").value;
+    const time = document.getElementById("deadlineTime").value;
+    const description = document.getElementById("deadlineDescription").value.trim();
 
-    // Handle form submission
-    createForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const name = subjectNameInput.value.trim();
-      const alias = subjectAliasInput.value.trim();
-      const description = subjectDescriptionInput.value.trim();
-      const color = subjectColorInput.value;
-
-      // Validation: Only allow "Human Computer Interaction" with alias "HCI"
-      if (
-        name !== "Human Computer Interaction" ||
-        alias !== "HCI" ||
-        description !== "This is Human Computer Interaction!" ||
-        color !== "#15ce46"
-      ) {
-        alert("Validation failed. Only 'Human Computer Interaction' with alias 'HCI' is allowed.");
-        return;
-      }
-
-      // Add the subject to the top bar
-      addSubjectToTabs(alias, color);
-
-      // Reset the form
-      createForm.reset();
-      subjectColorInput.value = "#15ce46"; // Reset to fixed color
-    });
-
-    function addSubjectToTabs(alias, color) {
-      const newTab = document.createElement('li');
-      newTab.className = 'nav-item text-white';
-
-      const newLink = document.createElement('a');
-      newLink.className = 'nav-link subject-tab';
-      newLink.href = 'hci.html'; // Link to the HCI page
-      newLink.style.color = 'inherit';
-      newLink.style.width = '100px';
-      newLink.style.backgroundColor = color;
-      newLink.style.fontWeight = 'bold';
-      newLink.textContent = alias;
-
-      newTab.appendChild(newLink);
-
-      // Insert the new tab next to "CIII" and before "+"
-      const ciiiTab = Array.from(subjectTabs.children).find(tab =>
-        tab.querySelector('.nav-link')?.textContent === 'CCIII'
-      );
-      subjectTabs.insertBefore(newTab, ciiiTab.nextSibling);
+    // Validation
+    if (!name || !date || !time || !description) {
+      alert("All fields are required.");
+      return;
     }
-  }
+
+    // Artificial Validation
+    if (name !== "HCI Test" || description !== "Main topics:\n1- High Fidelity Prototypes\n2- SUS score") {
+      alert("Validation failed. Please ensure all fields match the test values.");
+      return;
+    }
+
+        // Artificial Validation
+    const specificDate = "2025-06-10"; // Example specific date
+    const specificTime = "11:00"; // Example specific time
+    if (date !== specificDate || time !== specificTime) {
+      alert("Validation failed. Please ensure the date and time match the test values.");
+      return;
+    }
+
+    const [year, month, day] = date.split("-");
+    const formattedDate = `${day}/${month}/${year}`;
+
+    // Add Deadline to List
+    const deadlinesListUL = document.createElement("ul");
+    deadlinesListUL.className = "list-group";
+    deadlinesList.appendChild(deadlinesListUL)
+    const deadlineItem = document.createElement("li");
+    deadlineItem.className = "list-group-item d-flex justify-content-between align-items-center bg-hci text-white deadline-card";
+    deadlineItem.innerHTML = `
+      <div>
+        <h6>${name}</h6>
+      </div>
+      <span>${formattedDate} ${time}</span>
+    `;
+    deadlinesListUL.appendChild(deadlineItem);
+
+    // Hide No Deadlines Message
+    noDeadlinesMessage.classList.add("d-none");
+
+    // Reset Form
+    addEventForm.classList.add("d-none");
+    deadlineForm.classList.add("d-none");
+    document.getElementById("deadlineName").value = "";
+    document.getElementById("deadlineDate").value = "";
+    document.getElementById("deadlineTime").value = "";
+    document.getElementById("deadlineDescription").value = "";
+  });
+}
 });
