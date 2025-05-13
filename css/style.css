@@ -249,6 +249,7 @@ body {
 .option:hover {
   background-color: #b6b5b5;
 }
+
 .toolbar-icon {
   width: 16px;  /* or 20px if you prefer slightly larger */
   height: 16px;

@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Upload Button (only for folders)
         if (item.type === 'folder') {
           const uploadBtn = document.createElement('button');
-          uploadBtn.innerHTML = `<img src="assets/icons/upload-icon.svg" alt="Upload">`;
+          uploadBtn.innerHTML = `<img src="../assets/icons/download.png" alt="Upload" class="toolbar-icon" style="transform: scaleY(-1)">`;
           uploadBtn.onclick = async (e) => {
             e.stopPropagation();
             const confirmUpload = confirm(`Do you want to upload a file to "${item.name}"?`);
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
         // Download Button
         const downloadBtn = document.createElement('button');
-        downloadBtn.innerHTML = `<img src="assets/icons/download-icon.svg" alt="Download">`;
+        downloadBtn.innerHTML = `<img src="../assets/icons/download.png" alt="Download" class="toolbar-icon">`;
         downloadBtn.onclick = async (e) => {
           e.stopPropagation();
           console.log(`Downloading: ${item.name}`);
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
         // Delete Button
         const deleteBtn = document.createElement('button');
-        deleteBtn.innerHTML = `<img src="assets/icons/delete-icon.svg" alt="Delete">`;
+        deleteBtn.innerHTML = `<img src="../assets/icons/trashcan.png" alt="Delete" class="toolbar-icon">`;
         deleteBtn.onclick = async (e) => {
           e.stopPropagation();
           const confirmDelete = confirm(`Are you sure you want to delete "${item.name}"?`);
