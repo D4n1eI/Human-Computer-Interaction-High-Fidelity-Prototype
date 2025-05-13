@@ -256,6 +256,15 @@ if (currentPath.includes("hci-events.html")) {
   const deadlinesList = document.getElementById("deadlinesList");
   const noDeadlinesMessage = document.getElementById("noDeadlinesMessage");
 
+  // Initialize Clock Picker
+  const clockPicker = document.querySelector(".clockpicker");
+  $(clockPicker).clockpicker({
+    autoclose: true,
+    default: "now",
+    placement: "top", // Position the clock picker above the input field
+    align: "left"     // Align the clock picker with the left edge of the input field
+  });
+
   // Show the Add Form
   addEventButton.addEventListener("click", () => {
     addEventForm.classList.toggle("d-none");
@@ -282,6 +291,14 @@ if (currentPath.includes("hci-events.html")) {
     // Artificial Validation
     if (name !== "HCI Test" || description !== "Main topics:\n1- High Fidelity Prototypes\n2- SUS score") {
       alert("Validation failed. Please ensure all fields match the test values.");
+      return;
+    }
+
+        // Artificial Validation
+    const specificDate = "2025-06-10"; // Example specific date
+    const specificTime = "11:00"; // Example specific time
+    if (date !== specificDate || time !== specificTime) {
+      alert("Validation failed. Please ensure the date and time match the test values.");
       return;
     }
 

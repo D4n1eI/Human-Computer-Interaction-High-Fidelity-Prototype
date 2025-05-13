@@ -6,6 +6,7 @@
     <title>Studify</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../node_modules/clockpicker/dist/bootstrap-clockpicker.min.css">
   </head>
   <body class="body d-flex flex-column vh-100">
     <div class="d-flex flex-grow-1">
@@ -123,7 +124,13 @@
               </div>
               <div class="mb-3">
                 <label for="deadlineTime" class="form-label">Time</label>
-                <input type="time" class="form-control" id="deadlineTime">
+                <div class="input-group clockpicker">
+                  <input type="text" class="form-control" id="deadlineTime" placeholder="Select time">
+                  <span class="input-group-text">
+                    <i class="bi bi-clock"></i>
+                  </span>
+                </div>
+                <div id="clockPickerContainer" style="position: relative; height: 0;"></div>
               </div>
               <div class="mb-3">
                 <label for="deadlineDescription" class="form-label">Description</label>
@@ -157,7 +164,9 @@
         </div>
       </div>
     </div>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../node_modules/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
     <script src="../js/render.js"></script>
   </body>
 </html>

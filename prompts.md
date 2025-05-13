@@ -10,8 +10,8 @@
 # Creating a Deadline
 
 **Name:** HCI Test  
-**Date:**  
-**Time:**  
+**Date:** 10/06/2025 
+**Time:** 11:00  
 **Description:**
 > Main topics:<br>
 > 1- High Fidelity Prototypes<br>
