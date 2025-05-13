@@ -9,15 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <div style="display: flex; gap: 2%;">
               <button class="option">
                 <a href="quiz-hardcoded.html" style="text-decoration: none; color: inherit;">
-                  <img src="../assets/icons/play.png" alt="play" class="img-fluid">
-                </a>
+                <img src="../assets/icons/play.png" alt="play" class="img-fluid" style="width: 20px; height: 20px;">                </a>
               </button>
               <button class="option">
-                <img src="../assets/icons/edit.png" alt="edit" class="img-fluid">
-              </button>
+                <img src="../assets/icons/edit.png" alt="edit" class="img-fluid" style="width: 20px; height: 20px;">              </button>
               <button class="option">
-                <img src="../assets/icons/trash.png" alt="trash" class="img-fluid">
-              </button>
+                <img src="../assets/icons/trashcan.png" alt="trash" class="img-fluid" style="width: 20px; height: 20px;">              </button>
             </div>
           </div>
         `;
