@@ -138,10 +138,13 @@
             <div class="col">
               <h5>Close Deadlines:</h5>
               <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center bg-calculus text-white deadline-card">
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-calculus text-white deadline-card"
+                    data-bs-toggle="modal" data-bs-target="#viewDeadlineModal">
                   Calculus III Test
                   <span class="badge">23/06/2025 13:00</span>
                 </li>
+
+
               </ul>
             </div>
             <!-- Study-Button Section -->
@@ -153,6 +156,7 @@
           </div>
         </div>
       </div>
+
       <!-- Not Implemented Modal -->
       <div class="modal fade" id="notImplementedModal" tabindex="-1" aria-labelledby="notImplementedLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -168,6 +172,74 @@
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <!-- View Deadline Modal -->
+    <div class="modal fade" id="viewDeadlineModal" tabindex="-1" aria-labelledby="viewDeadlineLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="viewDeadlineLabel">Deadline Information</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Subject Name:</strong> <span id="view-subject-name">Calculus III</span></p>
+            <p><strong>Alias:</strong> <span id="view-alias">CCIII</span></p>
+            <p><strong>Event Name:</strong> <span id="view-event-name">Calculus III Test</span></p>
+            <p><strong>Date & Time:</strong> <span id="view-date-time">23/06/2025 13:00</span></p>
+            <p><strong>Description:</strong> <span id="view-description">Final major exam covering all course material from Calculus III.</span></p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" 
+                    data-bs-dismiss="modal" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#deadlineFormModal">
+              Edit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deadline Details Modal -->
+    <div class="modal fade" id="deadlineFormModal" tabindex="-1" aria-labelledby="deadlineFormLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form>
+            <div class="modal-header">
+              <h5 class="modal-title" id="deadlineFormLabel">Deadline Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Subject Name</label>
+                <input type="text" class="form-control" value="Calculus III" readonly>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Subject Alias</label>
+                <input type="text" class="form-control" value="CCIII" readonly>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Event Name</label>
+                <input type="text" class="form-control" value="Calculus III Test">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Date and Time</label>
+                <input type="datetime-local" class="form-control" value="2025-06-23T13:00">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" rows="3" placeholder="Describe the event..."></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
