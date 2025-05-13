@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const folderNameInput = document.getElementById('folderNameInput');
     const confirmCreateFolder = document.getElementById('confirmCreateFolder');
     const uploadButton = document.getElementById('uploadFile');
-    const deleteButton = document.getElementById('deleteButton');
-    const downloadButton = document.getElementById('downloadButton');
   
     let currentFolder = './calculus'; // Set your initial folder path here
   
@@ -30,10 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
         node.classList.add('tree-node');
   
         const itemDiv = document.createElement('div');
-        itemDiv.classList.add('item');
+        itemDiv.classList.add('item', 'd-flex', 'align-items-center');
   
         const icon = document.createElement('img');
-        icon.src = item.type === 'folder' ? 'assets/icons/folder-icon.svg' : 'assets/icons/file-icon.svg';
+        icon.src = item.type === 'folder' ? '../assets/icons/file_closed.png' : '../assets/icons/file-icon.svg';
+        icon.classList.add('folder-icon');
         itemDiv.appendChild(icon);
   
         const nameSpan = document.createElement('span');
@@ -41,14 +40,23 @@ document.addEventListener('DOMContentLoaded', () => {
         itemDiv.appendChild(nameSpan);
   
         const actions = document.createElement('div');
-        actions.classList.add('actions');
-        actions.style.display = 'none';
+        actions.classList.add('actions', 'gap-2');
+
+        const toggleButton = document.createElement('button');
+        toggleButton.classList.add('toggle-button');
+        toggleButton.innerHTML = `<img src="../assets/icons/not_toggled.png" alt="Toggle" class="toggle-icon">`;
+        toggleButton.onclick = (e) => {
+          e.stopPropagation();
+          toggleItem(item, toggleButton, node);
+        };
+        actions.appendChild(toggleButton);
   
         // Upload Button (only for folders)
         if (item.type === 'folder') {
-          const uploadBtn = document.createElement('button');
-          uploadBtn.innerHTML = `<img src="../assets/icons/download.png" alt="Upload" class="toolbar-icon" style="transform: scaleY(-1)">`;
-          uploadBtn.onclick = async (e) => {
+          const uploadButton = document.createElement('button');
+          uploadButton.classList.add('upload-button');
+          uploadButton.innerHTML = `<img src="../assets/icons/download.png" alt="Upload" class="toolbar-icon" style="transform: rotate(180deg);">`;
+          uploadButton.onclick = async (e) => {
             e.stopPropagation();
             const confirmUpload = confirm(`Do you want to upload a file to "${item.name}"?`);
             if (confirmUpload) {
@@ -62,8 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             }
           };
-          actions.appendChild(uploadBtn);
+          actions.appendChild(uploadButton);
         }
+        itemDiv.appendChild(actions);
   
         // Download Button
         const downloadBtn = document.createElement('button');
@@ -99,16 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         actions.appendChild(deleteBtn);
   
-        itemDiv.appendChild(actions);
         node.appendChild(itemDiv);
-  
-        itemDiv.onmouseenter = () => {
-          actions.style.display = 'flex';
-        };
-  
-        itemDiv.onmouseleave = () => {
-          actions.style.display = 'none';
-        };
   
         if (item.type === 'folder') {
           const childrenContainer = document.createElement('div');
@@ -121,8 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const entries = await api.readFolder(item.fullPath);
                 renderTree(entries, childrenContainer);
               }
-              childrenContainer.style.display =
-                childrenContainer.style.display === 'none' ? 'block' : 'none';
+              const isExpanded = childrenContainer.style.display === 'block';
+              childrenContainer.style.display = isExpanded ? 'none' : 'block';
+              icon.src = isExpanded ? '../assets/icons/file_closed.png' : '../assets/icons/file_open.png';
             }
           };
           node.appendChild(childrenContainer);
@@ -130,6 +131,20 @@ document.addEventListener('DOMContentLoaded', () => {
   
         parentElement.appendChild(node);
       });
+    }
+
+      function toggleItem(item, toggleButton, node) {
+      const isToggled = toggleButton.querySelector('img').src.includes('icon1.png');
+      const newIcon = isToggled ? '../assets/icons/not_toggled.png' : '../assets/icons/icon1.png';
+      toggleButton.querySelector('img').src = newIcon;
+
+      // If it's a folder, toggle all children
+      if (item.type === 'folder') {
+        const children = node.querySelectorAll('.toggle-button img');
+        children.forEach((childToggle) => {
+          childToggle.src = newIcon;
+        });
+      }
     }
   
     // Show or hide the loading spinner

@@ -22,14 +22,14 @@
     margin-right: 10px;
   }
   
-  .tree-node .actions {
-    margin-left: auto;
-    display: none; /* Hide by default */
-    gap: 5px;
-  }
-  
   .tree-node .item:hover {
     background-color: #e0e0e0; /* Darker background on hover */
+  }
+
+  .actions {
+    display: none; /* Hidden by default */
+    gap: 10px;
+    margin-left: auto; /* Push actions to the right */
   }
   
   .tree-node .item:hover .actions {
@@ -46,14 +46,6 @@
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
-  }
-  
-  .icon-folder::before {
-    content: "📁";
-  }
-  
-  .icon-upload::before {
-    content: "⬆️";
   }
 
   .modal {
@@ -100,3 +92,26 @@
     transform: translate(-50%, -50%);
     z-index: 1000;
   }
+
+  .toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.toggle-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Folder Icon */
+.folder-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.children {
+  margin-left: 20px;
+}
