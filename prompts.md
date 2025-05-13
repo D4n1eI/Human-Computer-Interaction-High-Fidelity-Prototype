@@ -19,9 +19,9 @@
 
 # Asking questions to the Calculus-III AI
 
-**Input:** ooga-booga
+**Input:** Can you please explain what the gradient vector represents in multivariable calculus?
 
 
 # Asking questions to the General AI (optional)
 
-**Input:** hehehehaw
+**Input:** What are the best times to study?

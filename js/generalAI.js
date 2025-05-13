@@ -1,11 +1,25 @@
 const sendButton = document.getElementById("send");
 const messageInput = document.getElementById("message");
 const interactionDiv = document.getElementById("user-ai-interaction");
+const defaultHeader = document.getElementById("default-header");
 
 function handleMessage() {
     const message = messageInput.value.trim().toLowerCase();
-    if (message === "ooga booga") {
-        interactionDiv.innerHTML = "<p><strong>You said:</strong> ooga booga</p><p><em>AI:</em> Spooky response activated 👻</p>";
+
+    if (message === "what are the best times to study?") {
+        interactionDiv.innerHTML = `
+            <div style="display: flex; align-items: right; justify-content: flex-end; margin-right: 20%;">
+                <div class="speech-bubble-right" style="top: 25%;  margin-right: 2%;">What are the best times to study?</div>
+                <img src="../assets/icons/user.png" style="position: relative;">
+            </div>
+            <div style="display: flex; align-items: left; margin-left: 5%; margin-top: 1%;">
+                <img src="../assets/icons/pixel.png" style="position: relative;">
+                <div class="speech-bubble-left" style="top: 25%; margin-left: 2%;">The best times to study are usually when you feel most alert and focused. For many people, this is in the morning after a good night's sleep, or in the early evening when energy levels are still stable. The key is to find a consistent time that fits your personal routine and avoid distractions during that period.</div>
+            </div>
+            `;
+
+        defaultHeader.style.display = "none";
+
         messageInput.value = "";
     }
 }
