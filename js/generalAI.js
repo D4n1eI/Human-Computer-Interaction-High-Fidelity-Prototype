@@ -23,6 +23,25 @@ function handleMessage() {
         messageInput.value = "";
     } else if (message === "can you please explain what the gradient vector represents in multivariable calculus?") {
     
+    } else if (message === "can you please show me a picture of pixel?") {
+        interactionDiv.innerHTML = `
+            <div style="display: flex; align-items: right; justify-content: flex-end; margin-right: 20%;">
+                <div class="speech-bubble-right" style="top: 25%;  margin-right: 2%;">Can you please show me a picture of Pixel?</div>
+                <img src="../assets/icons/user.png" style="position: relative;" width="50" height="50" class="rounded-circle">
+            </div>
+            <div style="display: flex; align-items: left; margin-left: 5%; margin-top: 1%;">
+                <img src="../assets/icons/icon1colored.png" style="position: relative;" width="50" height="50" class="rounded-circle">
+                <div class="speech-bubble-left" style="top: 25%; margin-left: 2%;">
+                    <img src="../assets/pixel/mybeloved.jpeg" alt="Pixel" >
+                    <br><br>
+                    <p>Here is a picture of Pixel. He is such a good boy!</p>
+                </div>
+            </div>
+            `;
+
+        defaultHeader.style.display = "none";
+
+        messageInput.value = "";
     }
 }
 
