@@ -7,14 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
           <div style="position: relative; display: flex; justify-content: space-between; align-items: center; height: 20%; background-color: #f0f0f0; border-radius: 10px; border: 2px solid #ccc;">
             <span style="font-weight: bold;">Quiz 1</span>
             <div style="display: flex; gap: 2%;">
+              <a href="quiz-hardcoded.html" style="text-decoration: none; color: inherit;">
+                <button class="option">
+                  <img src="../assets/icons/play.png" alt="play" class="img-fluid" style="width: 20px; height: 20px;">
+                </button>
+              </a>
               <button class="option">
-                <a href="quiz-hardcoded.html" style="text-decoration: none; color: inherit;">
-                <img src="../assets/icons/play.png" alt="play" class="img-fluid" style="width: 20px; height: 20px;">                </a>
+                <img src="../assets/icons/edit.png" alt="edit" class="img-fluid" style="width: 20px; height: 20px;">
               </button>
               <button class="option">
-                <img src="../assets/icons/edit.png" alt="edit" class="img-fluid" style="width: 20px; height: 20px;">              </button>
-              <button class="option">
-                <img src="../assets/icons/trashcan.png" alt="trash" class="img-fluid" style="width: 20px; height: 20px;">              </button>
+                <img src="../assets/icons/trashcan.png" alt="trash" class="img-fluid" style="width: 20px; height: 20px;">
+              </button>
             </div>
           </div>
         `;

@@ -94,41 +94,42 @@
         <!-- Main page -->
         <div class="col-10">
           <!-- AI Quiz Taking Page -->
-          <h2 class="mb-4" style="text-align: center;">Quiz</h2>
+           <div style="display: flex; position: relative; top: 0; left: 5%; align-items: center;">
+            <a href="ciii-study-quiz.html" style="position: relative; font-weight: bolder;  width: 25%;">
+              <div class="btn btn-secondary" style="margin-top: 2%;"><</div>
+            </a>
+            <h2 class="mb-4" style="position: relative;">Quiz 1</h2>
+          </div>
           <div style="display: flex; align-items: center; margin-bottom: 2%;">
-            <div class="d-flex justify-content-end" style="position: relative; left: 5%;">
-              <a href="ciii-study-quiz.html" style="font-weight: bolder;">
-                  <div class="btn btn-secondary"><</div>
-              </a>
-            </div>
             <img id="feedback-img" src="../assets/pixel/var6_normal.png" style="position: relative; left: 15%; width: 10%;">
             <div id="feedback-text" class="speech-bubble-left" style="top: 25%; left: 20%;">This question is super important for your study, I swear it is! Like, look closely: I'm really asking something relevant, I think. But what could the right answer be? Nobody knows, maybe not even me. It could be A, it could be B, maybe C, or who knows, D just to throw you off. This even seems easy, but don't be fooled — it's kind of tricky, kind of confusing, but all part of the mental training! Come on, focus. You got this. Or not. Who knows? Just go for it!</div>
           </div>
+          <div id="next-question-container" class="text-center mt-3"></div>
           <div class="container">
             <div class="row text-center">
               <div class="col-md-6 mb-3">
-                <button class="option" data-option="1" style="width: 75%; height: 200%; top: 50%; left: 22.5%; display: flex; align-items: center; justify-content: flex-start;">
+                <button id="A" class="option" data-option="1" style="width: 75%; height: 200%; top: 50%; left: 22.5%; display: flex; align-items: center; justify-content: flex-start;">
                     <span style="font-weight: bold; margin-right: 3%; font-size: 2.5rem;">A</span>
                     <div style="border-left: 1px solid black; height: 100%; margin-right: 1%;"></div>
                     <span>A completely random answer</span>
                 </button>
               </div>
               <div class="col-md-6 mb-3">
-                <button class="option" data-option="2" style="width: 75%; height: 200%; top: 50%; left: 2.5%; display: flex; align-items: center; justify-content: flex-start;">
+                <button id="B" class="option" data-option="2" style="width: 75%; height: 200%; top: 50%; left: 2.5%; display: flex; align-items: center; justify-content: flex-start;">
                     <span style="font-weight: bold; margin-right: 3%; font-size: 2.5rem;">B</span>
                     <div style="border-left: 1px solid black; height: 100%; margin-right: 2%;"></div>
                     <span>Maybe it's this one, who knows?</span>
                 </button>
               </div>
               <div class="col-md-6 mb-3">
-                <button class="option" data-option="3" style="width: 75%; height: 200%; top: 150%; left: 22.5%; display: flex; align-items: center; justify-content: flex-start;">
+                <button id="C" class="option" data-option="3" style="width: 75%; height: 200%; top: 150%; left: 22.5%; display: flex; align-items: center; justify-content: flex-start;">
                     <span style="font-weight: bold; margin-right: 3%; font-size: 2.5rem;">C</span>
                     <div style="border-left: 1px solid black; height: 100%; margin-right: 1%;"></div>
                     <span>Hmm… this one seems right, no?</span>
                 </button>
               </div>
               <div class="col-md-6 mb-3">
-                <button class="option" data-option="4" style="width: 75%; height: 200%; top: 150%; left: 2.5%; display: flex; align-items: center; justify-content: flex-start;">
+                <button id="D" class="option" data-option="4" style="width: 75%; height: 200%; top: 150%; left: 2.5%; display: flex; align-items: center; justify-content: flex-start;">
                     <span style="font-weight: bold; margin-right: 3%; font-size: 2.5rem;">D</span>
                     <div style="border-left: 1px solid black; height: 100%; margin-right: 2%;"></div>
                     <span>Pick this one just because!</span>
@@ -157,9 +158,7 @@
       </div>
     </div>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script scr="../js/quiz-taking.js"></script>
+    <script src="../js/quiz-taking.js"></script>
     <script src="../js/render.js"></script>
   </body>
 </html>
-
-
