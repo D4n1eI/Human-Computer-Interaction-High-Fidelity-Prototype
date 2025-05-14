@@ -175,6 +175,23 @@ if (currentPath.includes("hci-events.html")) {
   const createDeadlineButton = document.getElementById("createDeadlineButton");
   const deadlinesList = document.getElementById("deadlinesList");
   const noDeadlinesMessage = document.getElementById("noDeadlinesMessage");
+  const timeInput = document.getElementById("deadlineTime");
+
+  // Open the clock picker in a small window
+  timeInput.addEventListener("click", () => {
+    const clockPickerWindow = window.open(
+      "clockpicker.html",
+      "ClockPicker",
+      "width=400,height=300,top=100,left=100"
+    );
+
+    // Listen for the selected time from the small window
+    window.addEventListener("message", (event) => {
+      if (event.data && event.data.time) {
+        timeInput.value = event.data.time;
+      }
+    });
+  });
 
   // Check for deadlines in sessionStorage
   const deadlines = JSON.parse(sessionStorage.getItem("deadlines") || "[]");
@@ -200,22 +217,6 @@ if (currentPath.includes("hci-events.html")) {
 
     deadlinesList.appendChild(deadlinesListUL);
   }
-
-  let clockPickerInitialized = false;
-
-  document.getElementById("deadlineTime").addEventListener("focus", () => {
-    if (!clockPickerInitialized) {
-      const clockPicker = document.querySelector(".clockpicker");
-      $(clockPicker).clockpicker({
-        autoclose: true,
-        default: "now",
-        placement: "top", // Position the clock picker above the input field
-        align: "left",    // Align the clock picker with the left edge of the input field
-        container: "#clockPickerContainer" // Render the clock picker inside the dedicated container
-      });
-      clockPickerInitialized = true;
-    }
-  });
 
   // Show the Add Form
   addEventButton.addEventListener("click", () => {

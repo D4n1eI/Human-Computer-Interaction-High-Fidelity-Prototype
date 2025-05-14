@@ -267,12 +267,23 @@ body {
   margin: 0; /* Remove default margin for proper alignment */
 }
 
-#clockPickerContainer {
-  position: relative;
-  min-height: 200px; /* Ensure enough space for the clock picker */
-  margin-top: 10px;
+.popup-clockpicker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 200px;
 }
 
-.clockpicker-popover {
-  z-index: 1050; /* Ensure the clock picker appears above other elements */
+.popup-clockpicker.d-none {
+  display: none;
+}
+
+.popup-clockpicker .btn {
+  width: 100%;
 }
