@@ -129,18 +129,23 @@ if (currentPath.includes("index.html")) {
 
   // Check for deadlines in sessionStorage
   const deadlines = JSON.parse(sessionStorage.getItem("deadlines") || "[]");
-  if (deadlines.length > 0) {
+   if (deadlines.length > 0) {
     deadlines.forEach(deadline => {
       const [year, month, day] = deadline.date.split("-");
       const formattedDate = `${day}/${month}/${year}`;
       const deadlineItem = document.createElement("li");
       deadlineItem.className = "list-group-item d-flex justify-content-between align-items-center bg-hci text-white deadline-card";
+      // ADD THESE LINES:
+      deadlineItem.setAttribute("data-subject", "Human Computer Interaction");
+      deadlineItem.setAttribute("data-event", deadline.name);
+      deadlineItem.setAttribute("data-datetime", `${deadline.date}T${deadline.time}`);
+      deadlineItem.setAttribute("data-description", deadline.description);
+
       deadlineItem.innerHTML = `
         ${deadline.name}
         <span class="badge">${formattedDate} ${deadline.time}</span>
       `;
 
-      // Prepend the new deadline to the top of the list
       deadlinesContainer.prepend(deadlineItem);
     });
   }
@@ -299,18 +304,24 @@ if (currentPath.includes("hci.html")) {
     deadlinesList.className = "list-group";
 
     deadlines.forEach(deadline => {
-      const [year, month, day] = deadline.date.split("-");
-      const formattedDate = `${day}/${month}/${year}`;
-      const deadlineItem = document.createElement("li");
-      deadlineItem.className = "list-group-item d-flex justify-content-between align-items-center bg-hci text-white deadline-card";
-      deadlineItem.innerHTML = `
-        <div>
-          <h6>${deadline.name}</h6>
-        </div>
-        <span>${formattedDate} ${deadline.time}</span>
-      `;
-      deadlinesList.appendChild(deadlineItem);
-    });
+  const [year, month, day] = deadline.date.split("-");
+  const formattedDate = `${day}/${month}/${year}`;
+  const deadlineItem = document.createElement("li");
+  deadlineItem.className = "list-group-item d-flex justify-content-between align-items-center bg-hci text-white deadline-card";
+  // Set data attributes for the modal!
+  deadlineItem.setAttribute("data-subject", "Human Computer Interaction");
+  deadlineItem.setAttribute("data-event", deadline.name);
+  deadlineItem.setAttribute("data-datetime", `${deadline.date}T${deadline.time}`);
+  deadlineItem.setAttribute("data-description", deadline.description);
+
+  deadlineItem.innerHTML = `
+    <div>
+      <h6>${deadline.name}</h6>
+    </div>
+    <span>${formattedDate} ${deadline.time}</span>
+  `;
+  deadlinesList.appendChild(deadlineItem);
+});
 
     deadlinesContainer.innerHTML = "<h5>Close Deadlines:</h5>";
     deadlinesContainer.appendChild(deadlinesList);
@@ -318,4 +329,98 @@ if (currentPath.includes("hci.html")) {
     deadlinesContainer.innerHTML = "<h5>Close Deadlines:</h5>You have no deadlines here yet!";
   }
 }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const deadline = document.getElementById('calculus-deadline');
+  if (deadline) {
+    deadline.addEventListener('click', () => {
+      // Optionally, set modal fields here if dynamic
+      document.getElementById('modal-subject').value = "Calculus III";
+      document.getElementById('modal-event').value = "Calculus III Test";
+      document.getElementById('modal-datetime').value = "2025-06-23T13:00";
+      document.getElementById('modal-description').value = "Final major exam covering all course material from Calculus III.";
+
+      const modal = new bootstrap.Modal(document.getElementById('deadlineFormModal'));
+      modal.show();
+    });
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.deadline-card').forEach(item => {
+    item.addEventListener('click', function() {
+      // Get data from attributes
+      const subject = this.getAttribute('data-subject');
+      const eventName = this.getAttribute('data-event');
+      const datetime = this.getAttribute('data-datetime');
+      const description = this.getAttribute('data-description');
+
+      // Fill modal fields
+      document.getElementById('modal-subject').value = subject;
+      document.getElementById('modal-event').value = eventName;
+      document.getElementById('modal-datetime').value = datetime;
+      document.getElementById('modal-description').value = description;
+
+      // Show modal
+      const modal = new bootstrap.Modal(document.getElementById('deadlineFormModal'));
+      modal.show();
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('click', function(e) {
+    const item = e.target.closest('.deadline-card');
+    if (item) {
+      // Get data from attributes
+      document.getElementById('modal-subject').value = item.getAttribute('data-subject');
+      document.getElementById('modal-event').value = item.getAttribute('data-event');
+      document.getElementById('modal-datetime').value = item.getAttribute('data-datetime');
+      document.getElementById('modal-description').value = item.getAttribute('data-description');
+
+      // Show modal
+      const modal = new bootstrap.Modal(document.getElementById('deadlineFormModal'));
+      modal.show();
+    }
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('click', function(e) {
+    const item = e.target.closest('.deadline-card');
+    if (item) {
+      document.getElementById('modal-subject').value = item.getAttribute('data-subject');
+      document.getElementById('modal-event').value = item.getAttribute('data-event');
+      document.getElementById('modal-datetime').value = item.getAttribute('data-datetime');
+      document.getElementById('modal-description').value = item.getAttribute('data-description');
+      const modal = new bootstrap.Modal(document.getElementById('deadlineFormModal'));
+      modal.show();
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('click', function(e) {
+    const item = e.target.closest('.deadline-card');
+    if (item && document.getElementById('viewDeadlineModal')) {
+      // Get data from attributes
+      document.getElementById('view-subject-name').textContent = item.getAttribute('data-subject');
+      document.getElementById('view-event-name').textContent = item.getAttribute('data-event');
+      // Format date & time for display
+      const datetime = item.getAttribute('data-datetime');
+      if (datetime) {
+        const [date, time] = datetime.split('T');
+        const [year, month, day] = date.split('-');
+        document.getElementById('view-date-time').textContent = `${day}/${month}/${year} ${time}`;
+      } else {
+        document.getElementById('view-date-time').textContent = '';
+      }
+      document.getElementById('view-description').textContent = item.getAttribute('data-description');
+      // Show modal
+      const modal = new bootstrap.Modal(document.getElementById('viewDeadlineModal'));
+      modal.show();
+    }
+  });
 });
