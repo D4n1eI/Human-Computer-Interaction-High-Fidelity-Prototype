@@ -348,79 +348,41 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.deadline-card').forEach(item => {
-    item.addEventListener('click', function() {
-      // Get data from attributes
-      const subject = this.getAttribute('data-subject');
-      const eventName = this.getAttribute('data-event');
-      const datetime = this.getAttribute('data-datetime');
-      const description = this.getAttribute('data-description');
-
-      // Fill modal fields
-      document.getElementById('modal-subject').value = subject;
-      document.getElementById('modal-event').value = eventName;
-      document.getElementById('modal-datetime').value = datetime;
-      document.getElementById('modal-description').value = description;
-
-      // Show modal
-      const modal = new bootstrap.Modal(document.getElementById('deadlineFormModal'));
-      modal.show();
-    });
-  });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', function(e) {
     const item = e.target.closest('.deadline-card');
     if (item) {
-      // Get data from attributes
-      document.getElementById('modal-subject').value = item.getAttribute('data-subject');
-      document.getElementById('modal-event').value = item.getAttribute('data-event');
-      document.getElementById('modal-datetime').value = item.getAttribute('data-datetime');
-      document.getElementById('modal-description').value = item.getAttribute('data-description');
+      // Try to find the modal for index/cciii pages
+      const deadlineFormModal = document.getElementById('deadlineFormModal');
+      // Try to find the modal for hci.html
+      const viewDeadlineModal = document.getElementById('viewDeadlineModal');
 
-      // Show modal
-      const modal = new bootstrap.Modal(document.getElementById('deadlineFormModal'));
-      modal.show();
-    }
-  });
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.addEventListener('click', function(e) {
-    const item = e.target.closest('.deadline-card');
-    if (item) {
-      document.getElementById('modal-subject').value = item.getAttribute('data-subject');
-      document.getElementById('modal-event').value = item.getAttribute('data-event');
-      document.getElementById('modal-datetime').value = item.getAttribute('data-datetime');
-      document.getElementById('modal-description').value = item.getAttribute('data-description');
-      const modal = new bootstrap.Modal(document.getElementById('deadlineFormModal'));
-      modal.show();
-    }
-  });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.addEventListener('click', function(e) {
-    const item = e.target.closest('.deadline-card');
-    if (item && document.getElementById('viewDeadlineModal')) {
-      // Get data from attributes
-      document.getElementById('view-subject-name').textContent = item.getAttribute('data-subject');
-      document.getElementById('view-event-name').textContent = item.getAttribute('data-event');
-      // Format date & time for display
-      const datetime = item.getAttribute('data-datetime');
-      if (datetime) {
-        const [date, time] = datetime.split('T');
-        const [year, month, day] = date.split('-');
-        document.getElementById('view-date-time').textContent = `${day}/${month}/${year} ${time}`;
-      } else {
-        document.getElementById('view-date-time').textContent = '';
+      if (deadlineFormModal) {
+        // Set fields for deadlineFormModal
+        document.getElementById('modal-subject').value = item.getAttribute('data-subject');
+        document.getElementById('modal-event').value = item.getAttribute('data-event');
+        document.getElementById('modal-datetime').value = item.getAttribute('data-datetime');
+        document.getElementById('modal-description').value = item.getAttribute('data-description');
+        const modal = new bootstrap.Modal(deadlineFormModal);
+        modal.show();
+      } else if (viewDeadlineModal) {
+        // Set fields for viewDeadlineModal
+        document.getElementById('view-subject-name').textContent = item.getAttribute('data-subject');
+        document.getElementById('view-event-name').textContent = item.getAttribute('data-event');
+        document.getElementById('view-date-time').textContent = item.getAttribute('data-datetime');
+        document.getElementById('view-description').textContent = item.getAttribute('data-description');
+        const modal = new bootstrap.Modal(viewDeadlineModal);
+        modal.show();
       }
-      document.getElementById('view-description').textContent = item.getAttribute('data-description');
-      // Show modal
-      const modal = new bootstrap.Modal(document.getElementById('viewDeadlineModal'));
-      modal.show();
+    }
+  });
+
+  // Clean up any leftover backdrops when any modal is hidden
+  ['deadlineFormModal', 'viewDeadlineModal'].forEach(modalId => {
+    const modalEl = document.getElementById(modalId);
+    if (modalEl) {
+      modalEl.addEventListener('hidden.bs.modal', function () {
+        document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+      });
     }
   });
 });
