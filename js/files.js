@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const uploadButton = document.getElementById('uploadFile');
   
     let currentFolder = './calculus'; // Set your initial folder path here
-  
+    console.log('Current folder:', currentFolder);
+
     async function loadFolder() {
       try {
         showLoadingSpinner(true); // Show spinner
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         itemDiv.classList.add('item', 'd-flex', 'align-items-center');
   
         const icon = document.createElement('img');
-        icon.src = item.type === 'folder' ? '../assets/icons/file_closed.png' : '../assets/icons/file-icon.svg';
+        icon.src = item.type === 'folder' ? '../assets/icons/file_closed.png' : '../assets/icons/file-icon.png';
         icon.classList.add('folder-icon');
         itemDiv.appendChild(icon);
   
