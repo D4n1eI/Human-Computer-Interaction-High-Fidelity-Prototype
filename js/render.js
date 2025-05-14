@@ -125,6 +125,26 @@ if (currentPath.includes("index.html")) {
     });
   }
 
+  const deadlinesContainer = document.querySelector(".list-group");
+
+  // Check for deadlines in sessionStorage
+  const deadlines = JSON.parse(sessionStorage.getItem("deadlines") || "[]");
+  if (deadlines.length > 0) {
+    deadlines.forEach(deadline => {
+      const [year, month, day] = deadline.date.split("-");
+      const formattedDate = `${day}/${month}/${year}`;
+      const deadlineItem = document.createElement("li");
+      deadlineItem.className = "list-group-item d-flex justify-content-between align-items-center bg-hci text-white deadline-card";
+      deadlineItem.innerHTML = `
+        ${deadline.name}
+        <span class="badge">${formattedDate} ${deadline.time}</span>
+      `;
+
+      // Prepend the new deadline to the top of the list
+      deadlinesContainer.prepend(deadlineItem);
+    });
+  }
+
   function addSubjectToSection(name, alias, color, parentElement) {
     // Prevent duplicate entries
     if (document.querySelector(`.subject-card[title="${name}"]`)) {
@@ -156,13 +176,45 @@ if (currentPath.includes("hci-events.html")) {
   const deadlinesList = document.getElementById("deadlinesList");
   const noDeadlinesMessage = document.getElementById("noDeadlinesMessage");
 
-  // Initialize Clock Picker
-  const clockPicker = document.querySelector(".clockpicker");
-  $(clockPicker).clockpicker({
-    autoclose: true,
-    default: "now",
-    placement: "top", // Position the clock picker above the input field
-    align: "left"     // Align the clock picker with the left edge of the input field
+  // Check for deadlines in sessionStorage
+  const deadlines = JSON.parse(sessionStorage.getItem("deadlines") || "[]");
+  if (deadlines.length > 0) {
+    noDeadlinesMessage.classList.add("d-none");
+
+    const deadlinesListUL = document.createElement("ul");
+    deadlinesListUL.className = "list-group";
+
+    deadlines.forEach(deadline => {
+      const [year, month, day] = deadline.date.split("-");
+      const formattedDate = `${day}/${month}/${year}`;
+      const deadlineItem = document.createElement("li");
+      deadlineItem.className = "list-group-item d-flex justify-content-between align-items-center bg-hci text-white deadline-card";
+      deadlineItem.innerHTML = `
+        <div>
+          <h6>${deadline.name}</h6>
+        </div>
+        <span>${formattedDate} ${deadline.time}</span>
+      `;
+      deadlinesListUL.appendChild(deadlineItem);
+    });
+
+    deadlinesList.appendChild(deadlinesListUL);
+  }
+
+  let clockPickerInitialized = false;
+
+  document.getElementById("deadlineTime").addEventListener("focus", () => {
+    if (!clockPickerInitialized) {
+      const clockPicker = document.querySelector(".clockpicker");
+      $(clockPicker).clockpicker({
+        autoclose: true,
+        default: "now",
+        placement: "top", // Position the clock picker above the input field
+        align: "left",    // Align the clock picker with the left edge of the input field
+        container: "#clockPickerContainer" // Render the clock picker inside the dedicated container
+      });
+      clockPickerInitialized = true;
+    }
   });
 
   // Show the Add Form
@@ -194,13 +246,18 @@ if (currentPath.includes("hci-events.html")) {
       return;
     }
 
-        // Artificial Validation
+    // Artificial Validation
     const specificDate = "2025-06-10"; // Example specific date
     const specificTime = "11:00"; // Example specific time
     if (date !== specificDate || time !== specificTime) {
       alert("Validation failed. Please ensure the date and time match the test values.");
       return;
     }
+
+    const deadlines = JSON.parse(sessionStorage.getItem("deadlines") || "[]");
+    const newDeadline = { name, date, time, description };
+    deadlines.push(newDeadline);
+    sessionStorage.setItem("deadlines", JSON.stringify(deadlines));
 
     const [year, month, day] = date.split("-");
     const formattedDate = `${day}/${month}/${year}`;
@@ -230,5 +287,34 @@ if (currentPath.includes("hci-events.html")) {
     document.getElementById("deadlineTime").value = "";
     document.getElementById("deadlineDescription").value = "";
   });
+}
+if (currentPath.includes("hci.html")) {
+    const deadlinesContainer = document.querySelector(".deadlines-space");
+
+  // Check for deadlines in sessionStorage
+  const deadlines = JSON.parse(sessionStorage.getItem("deadlines") || "[]");
+  if (deadlines.length > 0) {
+    const deadlinesList = document.createElement("ul");
+    deadlinesList.className = "list-group";
+
+    deadlines.forEach(deadline => {
+      const [year, month, day] = deadline.date.split("-");
+      const formattedDate = `${day}/${month}/${year}`;
+      const deadlineItem = document.createElement("li");
+      deadlineItem.className = "list-group-item d-flex justify-content-between align-items-center bg-hci text-white deadline-card";
+      deadlineItem.innerHTML = `
+        <div>
+          <h6>${deadline.name}</h6>
+        </div>
+        <span>${formattedDate} ${deadline.time}</span>
+      `;
+      deadlinesList.appendChild(deadlineItem);
+    });
+
+    deadlinesContainer.innerHTML = "<h5>Close Deadlines:</h5>";
+    deadlinesContainer.appendChild(deadlinesList);
+  } else {
+    deadlinesContainer.innerHTML = "<h5>Close Deadlines:</h5>You have no deadlines here yet!";
+  }
 }
 });

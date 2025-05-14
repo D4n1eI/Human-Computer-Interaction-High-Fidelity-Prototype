@@ -124,13 +124,19 @@
               </div>
               <div class="mb-3">
                 <label for="deadlineTime" class="form-label">Time</label>
-                <div class="input-group clockpicker">
-                  <input type="text" class="form-control" id="deadlineTime" placeholder="Select time">
-                  <span class="input-group-text">
-                    <i class="bi bi-clock"></i>
-                  </span>
+                <div class="row align-items-center">
+                  <!-- Time Input -->
+                  <div class="col-6">
+                    <div class="input-group clockpicker">
+                      <input type="text" class="form-control" id="deadlineTime" placeholder="Select time">
+                      <span class="input-group-text">
+                        <i class="bi bi-clock"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <!-- ClockPicker Container -->
+                  <div id="clockPickerContainer" class="col-6" style="position: relative;"></div>
                 </div>
-                <div id="clockPickerContainer" style="position: relative; height: 0;"></div>
               </div>
               <div class="mb-3">
                 <label for="deadlineDescription" class="form-label">Description</label>

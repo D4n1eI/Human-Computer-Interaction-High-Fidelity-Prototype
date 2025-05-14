@@ -255,3 +255,24 @@ body {
   height: 16px;
   object-fit: contain;
 }
+
+/* Align deadline name and badge in the center */
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Ensure vertical alignment */
+}
+
+.list-group-item h6 {
+  margin: 0; /* Remove default margin for proper alignment */
+}
+
+#clockPickerContainer {
+  position: relative;
+  min-height: 200px; /* Ensure enough space for the clock picker */
+  margin-top: 10px;
+}
+
+.clockpicker-popover {
+  z-index: 1050; /* Ensure the clock picker appears above other elements */
+}
