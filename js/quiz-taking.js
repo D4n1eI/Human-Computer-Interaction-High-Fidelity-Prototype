@@ -96,6 +96,11 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Correct answer selected");
       } else {
         buttons[key].style.backgroundColor = "#dc3545";
+        for (let k in buttons) {
+          if (buttons[k].dataset.answer === "Y") {
+            buttons[k].style.backgroundColor = "#28a745";
+          }
+        }
         speech.textContent = feedbacks.wrong.text;
         image.src = feedbacks.wrong.img;
         console.log("Wrong answer selected");
