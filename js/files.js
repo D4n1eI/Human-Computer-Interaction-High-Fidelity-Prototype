@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const toggleButton = document.createElement('button');
         toggleButton.classList.add('toggle-button');
         toggleButton.innerHTML = `<img src="../assets/icons/not_toggled.png" alt="Toggle" class="toggle-icon">`;
+        toggleButton.title = "Make item visible to AI";
         toggleButton.onclick = (e) => {
           e.stopPropagation();
           toggleItem(item, toggleButton, node);
@@ -57,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const uploadButton = document.createElement('button');
           uploadButton.classList.add('upload-button');
           uploadButton.innerHTML = `<img src="../assets/icons/download.png" alt="Upload" class="toolbar-icon" style="transform: rotate(180deg);">`;
+          uploadButton.title = "Upload item";
           uploadButton.onclick = async (e) => {
             e.stopPropagation();
             const confirmUpload = confirm(`Do you want to upload a file to "${item.name}"?`);
@@ -78,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Download Button
         const downloadBtn = document.createElement('button');
         downloadBtn.innerHTML = `<img src="../assets/icons/download.png" alt="Download" class="toolbar-icon">`;
+        downloadBtn.title = "Download item";
         downloadBtn.onclick = async (e) => {
           e.stopPropagation();
           console.log(`Downloading: ${item.name}`);
@@ -93,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Delete Button
         const deleteBtn = document.createElement('button');
         deleteBtn.innerHTML = `<img src="../assets/icons/trashcan.png" alt="Delete" class="toolbar-icon">`;
+        deleteBtn.title = "Delete item";
         deleteBtn.onclick = async (e) => {
           e.stopPropagation();
           const confirmDelete = confirm(`Are you sure you want to delete "${item.name}"?`);
