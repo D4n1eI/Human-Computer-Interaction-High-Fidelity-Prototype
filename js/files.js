@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (item.type === 'folder') {
           const uploadButton = document.createElement('button');
           uploadButton.classList.add('upload-button');
-          uploadButton.innerHTML = `<img src="../assets/icons/download.png" alt="Upload" class="toolbar-icon" style="transform: rotate(180deg);">`;
+          uploadButton.innerHTML = `+`;
           uploadButton.title = "Upload item";
           uploadButton.onclick = async (e) => {
             e.stopPropagation();
