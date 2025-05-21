@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (item.type === 'folder') {
           const uploadButton = document.createElement('button');
           uploadButton.classList.add('upload-button');
-          uploadButton.innerHTML = `+`;
+          uploadButton.innerHTML = `<img src="../assets/icons/plus.png" alt="Toggle" class="toggle-icon">`;
           uploadButton.title = "Upload item";
           uploadButton.onclick = async (e) => {
             e.stopPropagation();
