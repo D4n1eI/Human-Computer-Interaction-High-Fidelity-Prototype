@@ -78,20 +78,22 @@ document.addEventListener('DOMContentLoaded', () => {
         itemDiv.appendChild(actions);
   
         // Download Button
-        const downloadBtn = document.createElement('button');
-        downloadBtn.innerHTML = `<img src="../assets/icons/download.png" alt="Download" class="toolbar-icon">`;
-        downloadBtn.title = "Download item";
-        downloadBtn.onclick = async (e) => {
-          e.stopPropagation();
-          console.log(`Downloading: ${item.name}`);
-          const result = await api.downloadFile(item.fullPath);
-          if (result.success) {
-            console.log('Downloaded:', item.fullPath);
-          } else {
-            console.error('Error downloading file or folder:', result.error);
-          }
-        };
-        actions.appendChild(downloadBtn);
+        if (item.type === 'file') {
+          const downloadBtn = document.createElement('button');
+          downloadBtn.innerHTML = `<img src="../assets/icons/download.png" alt="Download" class="toolbar-icon">`;
+          downloadBtn.title = "Download item";
+          downloadBtn.onclick = async (e) => {
+            e.stopPropagation();
+            console.log(`Downloading: ${item.name}`);
+            const result = await api.downloadFile(item.fullPath);
+            if (result.success) {
+              console.log('Downloaded:', item.fullPath);
+            } else {
+              console.error('Error downloading file or folder:', result.error);
+            }
+          };
+          actions.appendChild(downloadBtn);
+        }
   
         // Delete Button
         const deleteBtn = document.createElement('button');

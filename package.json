@@ -96,6 +96,7 @@
       "js/**/*",
       "html/**/*",
       "css/**/*",
+      "calculus/**/*",
       "package.json"
     ],
     "directories": {
@@ -103,6 +104,13 @@
     },
     "win": {
       "target": "nsis"
-    }
+    },
+    "nsis": {
+      "oneClick": false
+    },
+      "asarUnpack": [
+    "calculus/**/*"
+    ]
+    
   }
 }
