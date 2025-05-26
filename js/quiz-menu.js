@@ -12,10 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
                   <img src="../assets/icons/play.png" alt="play" class="img-fluid" style="width: 20px; height: 20px;">
                 </button>
               </a>
-              <button class="option">
+              <button class="option btn-not-implemented">
                 <img src="../assets/icons/edit.png" alt="edit" class="img-fluid" style="width: 20px; height: 20px;">
               </button>
-              <button class="option">
+              <button class="option btn-not-implemented">
                 <img src="../assets/icons/trashcan.png" alt="trash" class="img-fluid" style="width: 20px; height: 20px;">
               </button>
             </div>
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <option disabled selected>...</option>
               </select>
             </label>
-            <button class="option">
+            <button class="option btn-not-implemented">
                 Create
             </button>
           </form>
