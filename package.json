@@ -102,6 +102,13 @@
     "directories": {
       "output": "dist"
     },
+        "mac": { 
+        "target": "dmg"
+    },
+    "linux": {
+        "target": "AppImage",
+        "category": "Utility"
+    },
     "win": {
       "target": "nsis"
     },
